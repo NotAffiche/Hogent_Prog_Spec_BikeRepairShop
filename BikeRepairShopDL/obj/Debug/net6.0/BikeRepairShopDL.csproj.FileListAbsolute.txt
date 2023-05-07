@@ -1,0 +1,15 @@
+D:\HoGent\Programming\repos\Specialisatie\SolutionBikeRepairShopDinsdag\BikeRepairShopDL\bin\Debug\net6.0\BikeRepairShopDL.deps.json
+D:\HoGent\Programming\repos\Specialisatie\SolutionBikeRepairShopDinsdag\BikeRepairShopDL\bin\Debug\net6.0\BikeRepairShopDL.dll
+D:\HoGent\Programming\repos\Specialisatie\SolutionBikeRepairShopDinsdag\BikeRepairShopDL\bin\Debug\net6.0\BikeRepairShopDL.pdb
+D:\HoGent\Programming\repos\Specialisatie\SolutionBikeRepairShopDinsdag\BikeRepairShopDL\bin\Debug\net6.0\BikeRepairShopBL.dll
+D:\HoGent\Programming\repos\Specialisatie\SolutionBikeRepairShopDinsdag\BikeRepairShopDL\bin\Debug\net6.0\BikeRepairShopBL.pdb
+D:\HoGent\Programming\repos\Specialisatie\SolutionBikeRepairShopDinsdag\BikeRepairShopDL\obj\Debug\net6.0\BikeRepairShopDL.csproj.AssemblyReference.cache
+D:\HoGent\Programming\repos\Specialisatie\SolutionBikeRepairShopDinsdag\BikeRepairShopDL\obj\Debug\net6.0\BikeRepairShopDL.GeneratedMSBuildEditorConfig.editorconfig
+D:\HoGent\Programming\repos\Specialisatie\SolutionBikeRepairShopDinsdag\BikeRepairShopDL\obj\Debug\net6.0\BikeRepairShopDL.AssemblyInfoInputs.cache
+D:\HoGent\Programming\repos\Specialisatie\SolutionBikeRepairShopDinsdag\BikeRepairShopDL\obj\Debug\net6.0\BikeRepairShopDL.AssemblyInfo.cs
+D:\HoGent\Programming\repos\Specialisatie\SolutionBikeRepairShopDinsdag\BikeRepairShopDL\obj\Debug\net6.0\BikeRepairShopDL.csproj.CoreCompileInputs.cache
+D:\HoGent\Programming\repos\Specialisatie\SolutionBikeRepairShopDinsdag\BikeRepairShopDL\obj\Debug\net6.0\BikeRepairShopDL.csproj.CopyComplete
+D:\HoGent\Programming\repos\Specialisatie\SolutionBikeRepairShopDinsdag\BikeRepairShopDL\obj\Debug\net6.0\BikeRepairShopDL.dll
+D:\HoGent\Programming\repos\Specialisatie\SolutionBikeRepairShopDinsdag\BikeRepairShopDL\obj\Debug\net6.0\refint\BikeRepairShopDL.dll
+D:\HoGent\Programming\repos\Specialisatie\SolutionBikeRepairShopDinsdag\BikeRepairShopDL\obj\Debug\net6.0\BikeRepairShopDL.pdb
+D:\HoGent\Programming\repos\Specialisatie\SolutionBikeRepairShopDinsdag\BikeRepairShopDL\obj\Debug\net6.0\ref\BikeRepairShopDL.dll

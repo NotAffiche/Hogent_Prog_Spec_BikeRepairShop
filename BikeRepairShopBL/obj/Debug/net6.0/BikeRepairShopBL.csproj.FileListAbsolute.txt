@@ -1,0 +1,12 @@
+D:\HoGent\Programming\repos\Specialisatie\SolutionBikeRepairShopDinsdag\BikeRepairShopBL\bin\Debug\net6.0\BikeRepairShopBL.deps.json
+D:\HoGent\Programming\repos\Specialisatie\SolutionBikeRepairShopDinsdag\BikeRepairShopBL\bin\Debug\net6.0\BikeRepairShopBL.dll
+D:\HoGent\Programming\repos\Specialisatie\SolutionBikeRepairShopDinsdag\BikeRepairShopBL\bin\Debug\net6.0\BikeRepairShopBL.pdb
+D:\HoGent\Programming\repos\Specialisatie\SolutionBikeRepairShopDinsdag\BikeRepairShopBL\obj\Debug\net6.0\BikeRepairShopBL.csproj.AssemblyReference.cache
+D:\HoGent\Programming\repos\Specialisatie\SolutionBikeRepairShopDinsdag\BikeRepairShopBL\obj\Debug\net6.0\BikeRepairShopBL.GeneratedMSBuildEditorConfig.editorconfig
+D:\HoGent\Programming\repos\Specialisatie\SolutionBikeRepairShopDinsdag\BikeRepairShopBL\obj\Debug\net6.0\BikeRepairShopBL.AssemblyInfoInputs.cache
+D:\HoGent\Programming\repos\Specialisatie\SolutionBikeRepairShopDinsdag\BikeRepairShopBL\obj\Debug\net6.0\BikeRepairShopBL.AssemblyInfo.cs
+D:\HoGent\Programming\repos\Specialisatie\SolutionBikeRepairShopDinsdag\BikeRepairShopBL\obj\Debug\net6.0\BikeRepairShopBL.csproj.CoreCompileInputs.cache
+D:\HoGent\Programming\repos\Specialisatie\SolutionBikeRepairShopDinsdag\BikeRepairShopBL\obj\Debug\net6.0\BikeRepairShopBL.dll
+D:\HoGent\Programming\repos\Specialisatie\SolutionBikeRepairShopDinsdag\BikeRepairShopBL\obj\Debug\net6.0\refint\BikeRepairShopBL.dll
+D:\HoGent\Programming\repos\Specialisatie\SolutionBikeRepairShopDinsdag\BikeRepairShopBL\obj\Debug\net6.0\BikeRepairShopBL.pdb
+D:\HoGent\Programming\repos\Specialisatie\SolutionBikeRepairShopDinsdag\BikeRepairShopBL\obj\Debug\net6.0\ref\BikeRepairShopBL.dll
