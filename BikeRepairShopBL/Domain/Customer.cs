@@ -9,11 +9,6 @@ namespace BikeRepairShopBL.Domain;
 
 public class Customer
 {
-    private int? _id;
-    private string _name;
-    private string _address;
-    private string _email;
-
     internal Customer(string name, string email, string address)
     {
         SetName(name);

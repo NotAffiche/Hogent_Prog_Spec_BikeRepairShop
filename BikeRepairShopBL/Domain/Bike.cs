@@ -10,10 +10,6 @@ namespace BikeRepairShopBL.Domain;
 
 public class Bike
 {
-    private int? _id;
-    private string? _description;
-    private double _purchaseCost;
-
     internal Bike(int? id, BikeType bikeType, double purchaseCost, string? description)
     {
         if (id.HasValue) SetId((int)id);

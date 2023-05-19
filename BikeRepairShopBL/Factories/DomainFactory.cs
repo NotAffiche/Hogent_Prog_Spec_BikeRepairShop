@@ -43,4 +43,21 @@ public class DomainFactory
         }
         catch (Exception ex) { throw new DomainException("NewBike", ex); }
     }
+
+    public static Repairman NewRepairman(RepairmanInfo ri)
+    {
+        try
+        {
+            return new Repairman(ri.Id, ri.Name, ri.Email, ri.CostPerHour);
+        }
+        catch (Exception ex) { throw new DomainException("NewRepairman", ex); }
+    }
+    public static Repairman ExistingRepairman(int? id, string name, string email, double cph)
+    {
+        try
+        {
+            return new Repairman(id, name, email, cph);
+        }
+        catch (Exception ex) { throw new DomainException("ExistingRepairman", ex); }
+    }
 }
