@@ -59,18 +59,18 @@ namespace BikeRepairShop.Admin.UI
             {//add
                 if (CBCustomer.SelectedItem is CustomerUI selectedCustomer)
                 {
-                    Bike.CustomerId = (int)selectedCustomer.ID;
-                    Bike.CustomerDesc = $"{selectedCustomer.Name} ({selectedCustomer.Email})";
+                    Bike.CustomerId = (int)selectedCustomer.ID!;
+                    Bike.CustomerDesc = $"{selectedCustomer.CustomerDescription}";
                     customerBikeManager.AddBike(BikeMapper.ToDTO(Bike));
-                    DialogResult = true;
-                    parentWindow.LoadGrids();
-                    Close();
                 }
                 else
                 {
                     MessageBox.Show("No customer selected", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
+            DialogResult = true;
+            parentWindow.LoadGrids();
+            Close();
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)

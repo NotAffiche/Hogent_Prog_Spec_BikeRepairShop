@@ -10,12 +10,18 @@ namespace BikeRepairShop.Admin.UI.Model;
 
 public class CustomerUI : INotifyPropertyChanged
 {
-    public CustomerUI(int? id, string name, string email, string address)
+    public CustomerUI()
+    {
+
+    }
+    public CustomerUI(int? id, string name, string email, string address, int nrOfBikes, double totalBikesValue)
     {
         ID = id;
         Name = name;
         Email = email;
         Address = address;
+        NrOfBikes = nrOfBikes;
+        TotalBikesValue = totalBikesValue;
     }
 
     public int? ID { get; set; }
@@ -25,6 +31,12 @@ public class CustomerUI : INotifyPropertyChanged
     public string Email { get { return _email; } set { _email = value; OnPropertyChanged(); } }
     private string _address;
     public string Address { get { return _address; } set { _address = value; OnPropertyChanged(); } }
+    private int _nrOfBikes;
+    public int NrOfBikes { get { return _nrOfBikes; } set { _nrOfBikes= value; OnPropertyChanged(); } }
+    private double _totalBikesValue;
+    public double TotalBikesValue { get { return _totalBikesValue; } set { _totalBikesValue= value; OnPropertyChanged(); } }
+    //private List<Bike> _bikes = new List<Bike>();
+    public string CustomerDescription { get { return $"{Name} ({Email})"; } }
 
     //event
     public event PropertyChangedEventHandler? PropertyChanged;

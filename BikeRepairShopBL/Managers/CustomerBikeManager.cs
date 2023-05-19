@@ -132,7 +132,8 @@ public class CustomerBikeManager
         try
         {
             if (bikeInfo == null) throw new ManagerException("CustomerManager del bike bi null");
-            Customer customer = repo.GetCustomer(bikeInfo.Customer.id);
+            Customer? customer = repo.GetCustomer(bikeInfo.Customer.id);
+            if (customer == null) throw new ManagerException("CustomerManager non existing (deleted?) customer");
             Bike bike = customer.GetBikes().Where(x => x.ID == bikeInfo.Id).First();
             //Bike bike = DomainFactory.ExistingBike(bikeInfo,customer);
             customer.RemoveBike(bike);

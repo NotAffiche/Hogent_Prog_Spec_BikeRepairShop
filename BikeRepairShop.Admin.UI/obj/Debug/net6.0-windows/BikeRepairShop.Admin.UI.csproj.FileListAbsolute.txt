@@ -103,3 +103,5 @@ C:\Users\Adrian\Desktop\Prog EXA\Hogent_Prog_Spec_BikeRepairShop\BikeRepairShop.
 C:\Users\Adrian\Desktop\Prog EXA\Hogent_Prog_Spec_BikeRepairShop\BikeRepairShop.Admin.UI\obj\Debug\net6.0-windows\BikeRepairShop.Admin.UI.pdb
 C:\Users\Adrian\Desktop\Prog EXA\Hogent_Prog_Spec_BikeRepairShop\BikeRepairShop.Admin.UI\obj\Debug\net6.0-windows\BikeRepairShop.Admin.UI.genruntimeconfig.cache
 C:\Users\Adrian\Desktop\Prog EXA\Hogent_Prog_Spec_BikeRepairShop\BikeRepairShop.Admin.UI\obj\Debug\net6.0-windows\ref\BikeRepairShop.Admin.UI.dll
+C:\Users\Adrian\Desktop\Prog EXA\Hogent_Prog_Spec_BikeRepairShop\BikeRepairShop.Admin.UI\obj\Debug\net6.0-windows\WindowCustomer.g.cs
+C:\Users\Adrian\Desktop\Prog EXA\Hogent_Prog_Spec_BikeRepairShop\BikeRepairShop.Admin.UI\obj\Debug\net6.0-windows\WindowCustomer.baml

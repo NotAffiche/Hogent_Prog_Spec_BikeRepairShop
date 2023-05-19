@@ -29,15 +29,16 @@ namespace BikeRepairShop.Admin.UI;
 public partial class MainWindow : Window
 {
     private CustomerBikeManager customerBikeManager;
-    public ObservableCollection<BikeUI> bikes;
     private CustomerBikeRepository customerBikeRepo;
 
+    public ObservableCollection<BikeUI> bikes;
     public ObservableCollection<CustomerUI> customers;
 
     public MainWindow()
     {
         InitializeComponent();
-        BikeDataGrid.IsReadOnly= true;
+        CustomerDataGrid.IsReadOnly = true;
+        BikeDataGrid.IsReadOnly = true;
         string conn = ConfigurationManager.ConnectionStrings["ADOconnSQL"].ConnectionString;
         customerBikeRepo = new CustomerBikeRepository(conn);
         customerBikeManager = new CustomerBikeManager(customerBikeRepo);
@@ -47,10 +48,47 @@ public partial class MainWindow : Window
     public void LoadGrids()
     {
         bikes = new ObservableCollection<BikeUI>(customerBikeManager.GetBikesInfo().Select(x => new BikeUI(x.Id, x.Description, x.BikeType, x.PurchaseCost, x.Customer.id, x.Customer.custDesc)));
-        customers = new ObservableCollection<CustomerUI>(customerBikeManager.GetCustomersInfo().Select(x => new CustomerUI(x.Id, x.Name, x.Email, x.Address)));
+        customers = new ObservableCollection<CustomerUI>(customerBikeManager.GetCustomersInfo().Select(x => new CustomerUI(x.Id, x.Name, x.Email, x.Address, x.NrOfBikes, x.TotalBikeValues)));
         BikeDataGrid.ItemsSource = bikes;
+        CustomerDataGrid.ItemsSource = customers;
     }
 
+    #region customers
+    private void MenuItemAddCustomer_Click(object sender, RoutedEventArgs e)
+    {
+        WindowCustomer windowCustomer = new WindowCustomer(customerBikeManager, this);
+        windowCustomer.Customer = new CustomerUI();
+        windowCustomer.ShowDialog();
+    }
+    private void MenuItemDeleteCustomer_Click(object sender, RoutedEventArgs e)
+    {
+        CustomerUI cust = (CustomerUI)CustomerDataGrid.SelectedItem;
+        if (cust == null) MessageBox.Show("No selection", "Customer");
+        else
+        {
+            if (MessageBox.Show("Are you sure?", "Delete customer", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+            {
+                CustomerUI customerUI = (CustomerUI)CustomerDataGrid.SelectedItem;
+                customerBikeManager.DeleteCustomer(CustomerMapper.ToDTO(customerUI));
+            }
+        }
+        LoadGrids();
+    }
+    private void MenuItemUpdateCustomer_Click(object sender, RoutedEventArgs e)
+    {
+        WindowCustomer windowCustomer = new WindowCustomer(customerBikeManager, this, true);
+
+        CustomerUI customer = (CustomerUI)CustomerDataGrid.SelectedItem;
+        if (customer == null) MessageBox.Show("No selection", "Customer");
+        else
+        {
+            windowCustomer.Customer = customer;
+            windowCustomer.ShowDialog();
+        }
+    }
+    #endregion
+
+    #region bikes
     private void MenuItemAddBike_Click(object sender, RoutedEventArgs e)
     {
         WindowBike windowBike = new WindowBike(customerBikeManager, this);
@@ -58,7 +96,6 @@ public partial class MainWindow : Window
         windowBike.Bike = new BikeUI();
         windowBike.ShowDialog();
     }
-
     private void MenuItemDeleteBike_Click(object sender, RoutedEventArgs e)
     {
         BikeUI bike = (BikeUI)BikeDataGrid.SelectedItem;
@@ -73,7 +110,6 @@ public partial class MainWindow : Window
             }
         }
     }
-
     private void MenuItemUpdateBike_Click(object sender, RoutedEventArgs e)
     {
         WindowBike windowBike = new WindowBike(customerBikeManager, this, true);
@@ -86,6 +122,10 @@ public partial class MainWindow : Window
             windowBike.ShowDialog();
         }
     }
+    #endregion
+
+    #region repairmen
+    #endregion
 
     private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
     {
