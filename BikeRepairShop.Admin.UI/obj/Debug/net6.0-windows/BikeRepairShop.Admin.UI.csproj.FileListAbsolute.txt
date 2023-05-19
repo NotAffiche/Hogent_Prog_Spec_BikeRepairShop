@@ -33,3 +33,73 @@ D:\HoGent\Programming\repos\Specialisatie\SolutionBikeRepairShopDinsdag\BikeRepa
 D:\HoGent\Programming\repos\Specialisatie\SolutionBikeRepairShopDinsdag\BikeRepairShop.Admin.UI\bin\Debug\net6.0-windows\BikeRepairShopDL.pdb
 D:\HoGent\Programming\repos\Specialisatie\SolutionBikeRepairShopDinsdag\BikeRepairShop.Admin.UI\obj\Debug\net6.0-windows\BikeRepairShop.Admin.UI.csproj.CopyComplete
 D:\HoGent\Programming\repos\Specialisatie\SolutionBikeRepairShopDinsdag\BikeRepairShop.Admin.UI\bin\Debug\net6.0-windows\BikeRepairShop.Admin.UI.dll.config
+C:\Users\Adrian\Desktop\Prog Spec EXA\Hogent_Prog_Spec_BikeRepairShop\BikeRepairShop.Admin.UI\bin\Debug\net6.0-windows\BikeRepairShop.Admin.UI.exe
+C:\Users\Adrian\Desktop\Prog Spec EXA\Hogent_Prog_Spec_BikeRepairShop\BikeRepairShop.Admin.UI\bin\Debug\net6.0-windows\BikeRepairShop.Admin.UI.dll.config
+C:\Users\Adrian\Desktop\Prog Spec EXA\Hogent_Prog_Spec_BikeRepairShop\BikeRepairShop.Admin.UI\bin\Debug\net6.0-windows\BikeRepairShop.Admin.UI.deps.json
+C:\Users\Adrian\Desktop\Prog Spec EXA\Hogent_Prog_Spec_BikeRepairShop\BikeRepairShop.Admin.UI\bin\Debug\net6.0-windows\BikeRepairShop.Admin.UI.runtimeconfig.json
+C:\Users\Adrian\Desktop\Prog Spec EXA\Hogent_Prog_Spec_BikeRepairShop\BikeRepairShop.Admin.UI\bin\Debug\net6.0-windows\BikeRepairShop.Admin.UI.dll
+C:\Users\Adrian\Desktop\Prog Spec EXA\Hogent_Prog_Spec_BikeRepairShop\BikeRepairShop.Admin.UI\bin\Debug\net6.0-windows\BikeRepairShop.Admin.UI.pdb
+C:\Users\Adrian\Desktop\Prog Spec EXA\Hogent_Prog_Spec_BikeRepairShop\BikeRepairShop.Admin.UI\bin\Debug\net6.0-windows\System.Data.SqlClient.dll
+C:\Users\Adrian\Desktop\Prog Spec EXA\Hogent_Prog_Spec_BikeRepairShop\BikeRepairShop.Admin.UI\bin\Debug\net6.0-windows\runtimes\win-arm64\native\sni.dll
+C:\Users\Adrian\Desktop\Prog Spec EXA\Hogent_Prog_Spec_BikeRepairShop\BikeRepairShop.Admin.UI\bin\Debug\net6.0-windows\runtimes\win-x64\native\sni.dll
+C:\Users\Adrian\Desktop\Prog Spec EXA\Hogent_Prog_Spec_BikeRepairShop\BikeRepairShop.Admin.UI\bin\Debug\net6.0-windows\runtimes\win-x86\native\sni.dll
+C:\Users\Adrian\Desktop\Prog Spec EXA\Hogent_Prog_Spec_BikeRepairShop\BikeRepairShop.Admin.UI\bin\Debug\net6.0-windows\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
+C:\Users\Adrian\Desktop\Prog Spec EXA\Hogent_Prog_Spec_BikeRepairShop\BikeRepairShop.Admin.UI\bin\Debug\net6.0-windows\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
+C:\Users\Adrian\Desktop\Prog Spec EXA\Hogent_Prog_Spec_BikeRepairShop\BikeRepairShop.Admin.UI\bin\Debug\net6.0-windows\BikeRepairShopBL.dll
+C:\Users\Adrian\Desktop\Prog Spec EXA\Hogent_Prog_Spec_BikeRepairShop\BikeRepairShop.Admin.UI\bin\Debug\net6.0-windows\BikeRepairShopDL.dll
+C:\Users\Adrian\Desktop\Prog Spec EXA\Hogent_Prog_Spec_BikeRepairShop\BikeRepairShop.Admin.UI\bin\Debug\net6.0-windows\BikeRepairShopBL.pdb
+C:\Users\Adrian\Desktop\Prog Spec EXA\Hogent_Prog_Spec_BikeRepairShop\BikeRepairShop.Admin.UI\bin\Debug\net6.0-windows\BikeRepairShopDL.pdb
+C:\Users\Adrian\Desktop\Prog Spec EXA\Hogent_Prog_Spec_BikeRepairShop\BikeRepairShop.Admin.UI\obj\Debug\net6.0-windows\BikeRepairShop.Admin.UI.csproj.AssemblyReference.cache
+C:\Users\Adrian\Desktop\Prog Spec EXA\Hogent_Prog_Spec_BikeRepairShop\BikeRepairShop.Admin.UI\obj\Debug\net6.0-windows\MainWindow.g.cs
+C:\Users\Adrian\Desktop\Prog Spec EXA\Hogent_Prog_Spec_BikeRepairShop\BikeRepairShop.Admin.UI\obj\Debug\net6.0-windows\WindowBike.g.cs
+C:\Users\Adrian\Desktop\Prog Spec EXA\Hogent_Prog_Spec_BikeRepairShop\BikeRepairShop.Admin.UI\obj\Debug\net6.0-windows\App.g.cs
+C:\Users\Adrian\Desktop\Prog Spec EXA\Hogent_Prog_Spec_BikeRepairShop\BikeRepairShop.Admin.UI\obj\Debug\net6.0-windows\BikeRepairShop.Admin.UI_MarkupCompile.cache
+C:\Users\Adrian\Desktop\Prog Spec EXA\Hogent_Prog_Spec_BikeRepairShop\BikeRepairShop.Admin.UI\obj\Debug\net6.0-windows\BikeRepairShop.Admin.UI_MarkupCompile.lref
+C:\Users\Adrian\Desktop\Prog Spec EXA\Hogent_Prog_Spec_BikeRepairShop\BikeRepairShop.Admin.UI\obj\Debug\net6.0-windows\MainWindow.baml
+C:\Users\Adrian\Desktop\Prog Spec EXA\Hogent_Prog_Spec_BikeRepairShop\BikeRepairShop.Admin.UI\obj\Debug\net6.0-windows\WindowBike.baml
+C:\Users\Adrian\Desktop\Prog Spec EXA\Hogent_Prog_Spec_BikeRepairShop\BikeRepairShop.Admin.UI\obj\Debug\net6.0-windows\BikeRepairShop.Admin.UI.g.resources
+C:\Users\Adrian\Desktop\Prog Spec EXA\Hogent_Prog_Spec_BikeRepairShop\BikeRepairShop.Admin.UI\obj\Debug\net6.0-windows\BikeRepairShop.Admin.UI.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Adrian\Desktop\Prog Spec EXA\Hogent_Prog_Spec_BikeRepairShop\BikeRepairShop.Admin.UI\obj\Debug\net6.0-windows\BikeRepairShop.Admin.UI.AssemblyInfoInputs.cache
+C:\Users\Adrian\Desktop\Prog Spec EXA\Hogent_Prog_Spec_BikeRepairShop\BikeRepairShop.Admin.UI\obj\Debug\net6.0-windows\BikeRepairShop.Admin.UI.AssemblyInfo.cs
+C:\Users\Adrian\Desktop\Prog Spec EXA\Hogent_Prog_Spec_BikeRepairShop\BikeRepairShop.Admin.UI\obj\Debug\net6.0-windows\BikeRepairShop.Admin.UI.csproj.CoreCompileInputs.cache
+C:\Users\Adrian\Desktop\Prog Spec EXA\Hogent_Prog_Spec_BikeRepairShop\BikeRepairShop.Admin.UI\obj\Debug\net6.0-windows\BikeRepairShop.Admin.UI.csproj.CopyComplete
+C:\Users\Adrian\Desktop\Prog Spec EXA\Hogent_Prog_Spec_BikeRepairShop\BikeRepairShop.Admin.UI\obj\Debug\net6.0-windows\BikeRepairShop.Admin.UI.dll
+C:\Users\Adrian\Desktop\Prog Spec EXA\Hogent_Prog_Spec_BikeRepairShop\BikeRepairShop.Admin.UI\obj\Debug\net6.0-windows\refint\BikeRepairShop.Admin.UI.dll
+C:\Users\Adrian\Desktop\Prog Spec EXA\Hogent_Prog_Spec_BikeRepairShop\BikeRepairShop.Admin.UI\obj\Debug\net6.0-windows\BikeRepairShop.Admin.UI.pdb
+C:\Users\Adrian\Desktop\Prog Spec EXA\Hogent_Prog_Spec_BikeRepairShop\BikeRepairShop.Admin.UI\obj\Debug\net6.0-windows\BikeRepairShop.Admin.UI.genruntimeconfig.cache
+C:\Users\Adrian\Desktop\Prog Spec EXA\Hogent_Prog_Spec_BikeRepairShop\BikeRepairShop.Admin.UI\obj\Debug\net6.0-windows\ref\BikeRepairShop.Admin.UI.dll
+C:\Users\Adrian\Desktop\Prog EXA\Hogent_Prog_Spec_BikeRepairShop\BikeRepairShop.Admin.UI\bin\Debug\net6.0-windows\BikeRepairShop.Admin.UI.exe
+C:\Users\Adrian\Desktop\Prog EXA\Hogent_Prog_Spec_BikeRepairShop\BikeRepairShop.Admin.UI\bin\Debug\net6.0-windows\BikeRepairShop.Admin.UI.dll.config
+C:\Users\Adrian\Desktop\Prog EXA\Hogent_Prog_Spec_BikeRepairShop\BikeRepairShop.Admin.UI\bin\Debug\net6.0-windows\BikeRepairShop.Admin.UI.deps.json
+C:\Users\Adrian\Desktop\Prog EXA\Hogent_Prog_Spec_BikeRepairShop\BikeRepairShop.Admin.UI\bin\Debug\net6.0-windows\BikeRepairShop.Admin.UI.runtimeconfig.json
+C:\Users\Adrian\Desktop\Prog EXA\Hogent_Prog_Spec_BikeRepairShop\BikeRepairShop.Admin.UI\bin\Debug\net6.0-windows\BikeRepairShop.Admin.UI.dll
+C:\Users\Adrian\Desktop\Prog EXA\Hogent_Prog_Spec_BikeRepairShop\BikeRepairShop.Admin.UI\bin\Debug\net6.0-windows\BikeRepairShop.Admin.UI.pdb
+C:\Users\Adrian\Desktop\Prog EXA\Hogent_Prog_Spec_BikeRepairShop\BikeRepairShop.Admin.UI\bin\Debug\net6.0-windows\System.Data.SqlClient.dll
+C:\Users\Adrian\Desktop\Prog EXA\Hogent_Prog_Spec_BikeRepairShop\BikeRepairShop.Admin.UI\bin\Debug\net6.0-windows\runtimes\win-arm64\native\sni.dll
+C:\Users\Adrian\Desktop\Prog EXA\Hogent_Prog_Spec_BikeRepairShop\BikeRepairShop.Admin.UI\bin\Debug\net6.0-windows\runtimes\win-x64\native\sni.dll
+C:\Users\Adrian\Desktop\Prog EXA\Hogent_Prog_Spec_BikeRepairShop\BikeRepairShop.Admin.UI\bin\Debug\net6.0-windows\runtimes\win-x86\native\sni.dll
+C:\Users\Adrian\Desktop\Prog EXA\Hogent_Prog_Spec_BikeRepairShop\BikeRepairShop.Admin.UI\bin\Debug\net6.0-windows\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
+C:\Users\Adrian\Desktop\Prog EXA\Hogent_Prog_Spec_BikeRepairShop\BikeRepairShop.Admin.UI\bin\Debug\net6.0-windows\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
+C:\Users\Adrian\Desktop\Prog EXA\Hogent_Prog_Spec_BikeRepairShop\BikeRepairShop.Admin.UI\bin\Debug\net6.0-windows\BikeRepairShopBL.dll
+C:\Users\Adrian\Desktop\Prog EXA\Hogent_Prog_Spec_BikeRepairShop\BikeRepairShop.Admin.UI\bin\Debug\net6.0-windows\BikeRepairShopDL.dll
+C:\Users\Adrian\Desktop\Prog EXA\Hogent_Prog_Spec_BikeRepairShop\BikeRepairShop.Admin.UI\bin\Debug\net6.0-windows\BikeRepairShopBL.pdb
+C:\Users\Adrian\Desktop\Prog EXA\Hogent_Prog_Spec_BikeRepairShop\BikeRepairShop.Admin.UI\bin\Debug\net6.0-windows\BikeRepairShopDL.pdb
+C:\Users\Adrian\Desktop\Prog EXA\Hogent_Prog_Spec_BikeRepairShop\BikeRepairShop.Admin.UI\obj\Debug\net6.0-windows\BikeRepairShop.Admin.UI.csproj.AssemblyReference.cache
+C:\Users\Adrian\Desktop\Prog EXA\Hogent_Prog_Spec_BikeRepairShop\BikeRepairShop.Admin.UI\obj\Debug\net6.0-windows\MainWindow.g.cs
+C:\Users\Adrian\Desktop\Prog EXA\Hogent_Prog_Spec_BikeRepairShop\BikeRepairShop.Admin.UI\obj\Debug\net6.0-windows\WindowBike.g.cs
+C:\Users\Adrian\Desktop\Prog EXA\Hogent_Prog_Spec_BikeRepairShop\BikeRepairShop.Admin.UI\obj\Debug\net6.0-windows\App.g.cs
+C:\Users\Adrian\Desktop\Prog EXA\Hogent_Prog_Spec_BikeRepairShop\BikeRepairShop.Admin.UI\obj\Debug\net6.0-windows\BikeRepairShop.Admin.UI_MarkupCompile.cache
+C:\Users\Adrian\Desktop\Prog EXA\Hogent_Prog_Spec_BikeRepairShop\BikeRepairShop.Admin.UI\obj\Debug\net6.0-windows\BikeRepairShop.Admin.UI_MarkupCompile.lref
+C:\Users\Adrian\Desktop\Prog EXA\Hogent_Prog_Spec_BikeRepairShop\BikeRepairShop.Admin.UI\obj\Debug\net6.0-windows\MainWindow.baml
+C:\Users\Adrian\Desktop\Prog EXA\Hogent_Prog_Spec_BikeRepairShop\BikeRepairShop.Admin.UI\obj\Debug\net6.0-windows\WindowBike.baml
+C:\Users\Adrian\Desktop\Prog EXA\Hogent_Prog_Spec_BikeRepairShop\BikeRepairShop.Admin.UI\obj\Debug\net6.0-windows\BikeRepairShop.Admin.UI.g.resources
+C:\Users\Adrian\Desktop\Prog EXA\Hogent_Prog_Spec_BikeRepairShop\BikeRepairShop.Admin.UI\obj\Debug\net6.0-windows\BikeRepairShop.Admin.UI.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Adrian\Desktop\Prog EXA\Hogent_Prog_Spec_BikeRepairShop\BikeRepairShop.Admin.UI\obj\Debug\net6.0-windows\BikeRepairShop.Admin.UI.AssemblyInfoInputs.cache
+C:\Users\Adrian\Desktop\Prog EXA\Hogent_Prog_Spec_BikeRepairShop\BikeRepairShop.Admin.UI\obj\Debug\net6.0-windows\BikeRepairShop.Admin.UI.AssemblyInfo.cs
+C:\Users\Adrian\Desktop\Prog EXA\Hogent_Prog_Spec_BikeRepairShop\BikeRepairShop.Admin.UI\obj\Debug\net6.0-windows\BikeRepairShop.Admin.UI.csproj.CoreCompileInputs.cache
+C:\Users\Adrian\Desktop\Prog EXA\Hogent_Prog_Spec_BikeRepairShop\BikeRepairShop.Admin.UI\obj\Debug\net6.0-windows\BikeRepairShop.Admin.UI.csproj.CopyComplete
+C:\Users\Adrian\Desktop\Prog EXA\Hogent_Prog_Spec_BikeRepairShop\BikeRepairShop.Admin.UI\obj\Debug\net6.0-windows\BikeRepairShop.Admin.UI.dll
+C:\Users\Adrian\Desktop\Prog EXA\Hogent_Prog_Spec_BikeRepairShop\BikeRepairShop.Admin.UI\obj\Debug\net6.0-windows\refint\BikeRepairShop.Admin.UI.dll
+C:\Users\Adrian\Desktop\Prog EXA\Hogent_Prog_Spec_BikeRepairShop\BikeRepairShop.Admin.UI\obj\Debug\net6.0-windows\BikeRepairShop.Admin.UI.pdb
+C:\Users\Adrian\Desktop\Prog EXA\Hogent_Prog_Spec_BikeRepairShop\BikeRepairShop.Admin.UI\obj\Debug\net6.0-windows\BikeRepairShop.Admin.UI.genruntimeconfig.cache
+C:\Users\Adrian\Desktop\Prog EXA\Hogent_Prog_Spec_BikeRepairShop\BikeRepairShop.Admin.UI\obj\Debug\net6.0-windows\ref\BikeRepairShop.Admin.UI.dll

@@ -14,26 +14,38 @@ public class Bike
     private string? _description;
     private double _purchaseCost;
 
-    public int? ID
+    internal Bike(int? id, BikeType bikeType, double purchaseCost, string? description)
     {
-        get { return _id; }
-        private set
-        {
-            if (value <= 0) throw new DomainException("bike-setid");
-            _id = value;
-        }
+        if (id.HasValue) SetId((int)id);
+        BikeType = bikeType;
+        SetPurchaseCost(purchaseCost);
+        Description = description;
     }
+
+    public int? ID { get; private set; }
     public string? Description { get; set; }
-    public double PurchaseCost
-    {
-        get { return _purchaseCost; }
-        private set
-        {
-            if (value <= 0) throw new DomainException("bike-setpurchasecost");
-            _purchaseCost = value;
-        }
-    }
+    public double PurchaseCost { get; private set; }
     public BikeType BikeType { get; set; }
+    public Customer Customer { get; private set; }
+
+    public void SetId(int id)
+    {
+        if (id <0) throw new DomainException("Bike invalid id");
+        ID = id;
+    }
+
+    public void SetPurchaseCost(double purchaseCost)
+    {
+        if (purchaseCost < 0) throw new DomainException("Bike invalid purchase cost");
+        PurchaseCost = purchaseCost;
+    }
+
+    public void SetCustomer(Customer customer)
+    {
+        if (customer == null) throw new DomainException("Bike Customer null");
+        if (!customer.GetBikes().Contains(this)) customer.AddBike(this);
+        Customer = customer;
+    }
 
     public override bool Equals(object? obj)
     {
@@ -46,12 +58,5 @@ public class Bike
     public override int GetHashCode()
     {
         return HashCode.Combine(Description, PurchaseCost, BikeType);
-    }
-
-    public Bike(string? description, BikeType biketype, double purchaseCost)
-    {
-        this.Description = description;
-        this.BikeType= biketype;
-        this.PurchaseCost = purchaseCost;
     }
 }

@@ -10,6 +10,10 @@ namespace BikeRepairShop.Admin.UI.Model;
 
 public class BikeUI : INotifyPropertyChanged
 {
+    public BikeUI()
+    {
+
+    }
     public BikeUI(int? id, string desc, BikeType bikeType, double purchaseCost, int custId, string custDesc) {
         Id = id;
         Description = desc;

@@ -1,4 +1,5 @@
-﻿using BikeRepairShop.Admin.UI.Model;
+﻿using BikeRepairShop.Admin.UI.Mappers;
+using BikeRepairShop.Admin.UI.Model;
 using BikeRepairShopBL.Domain;
 using BikeRepairShopBL.DTO;
 using BikeRepairShopBL.Managers;
@@ -28,10 +29,10 @@ namespace BikeRepairShop.Admin.UI;
 public partial class MainWindow : Window
 {
     private CustomerBikeManager customerBikeManager;
-    private ObservableCollection<BikeUI> bikes;
+    public ObservableCollection<BikeUI> bikes;
     private CustomerBikeRepository customerBikeRepo;
 
-    private ObservableCollection<string> customers; //TODO: replace with DTO (like BikeInfo)
+    public ObservableCollection<CustomerUI> customers;
 
     public MainWindow()
     {
@@ -40,22 +41,22 @@ public partial class MainWindow : Window
         string conn = ConfigurationManager.ConnectionStrings["ADOconnSQL"].ConnectionString;
         customerBikeRepo = new CustomerBikeRepository(conn);
         customerBikeManager = new CustomerBikeManager(customerBikeRepo);
-        bikes= new ObservableCollection<BikeUI>(customerBikeManager.GetBikesInfo().Select(x=>new BikeUI(x.Id, x.Description, x.BikeType, x.PurchaseCost, x.Customer.id, x.Customer.custDesc)));
-        customers = new ObservableCollection<string>(new List<string>() { "jos", "janine", "ivo"});
+        LoadGrids();
+    }
+
+    public void LoadGrids()
+    {
+        bikes = new ObservableCollection<BikeUI>(customerBikeManager.GetBikesInfo().Select(x => new BikeUI(x.Id, x.Description, x.BikeType, x.PurchaseCost, x.Customer.id, x.Customer.custDesc)));
+        customers = new ObservableCollection<CustomerUI>(customerBikeManager.GetCustomersInfo().Select(x => new CustomerUI(x.Id, x.Name, x.Email, x.Address)));
         BikeDataGrid.ItemsSource = bikes;
     }
 
     private void MenuItemAddBike_Click(object sender, RoutedEventArgs e)
     {
-        WindowBike windowBike = new WindowBike(customerBikeManager);
-
+        WindowBike windowBike = new WindowBike(customerBikeManager, this);
         windowBike.CBCustomer.ItemsSource = customers;
-
-        if (windowBike.ShowDialog() == true)
-        {
-            bikes.Add(windowBike.Bike);
-        }
-        
+        windowBike.Bike = new BikeUI();
+        windowBike.ShowDialog();
     }
 
     private void MenuItemDeleteBike_Click(object sender, RoutedEventArgs e)
@@ -68,21 +69,20 @@ public partial class MainWindow : Window
             {
                 BikeUI bikeUI = (BikeUI)BikeDataGrid.SelectedItem;
                 bikes.Remove(bikeUI);
-                //TODO: DL
+                customerBikeManager.DeleteBike(BikeMapper.ToDTO(bikeUI));
             }
         }
     }
 
     private void MenuItemUpdateBike_Click(object sender, RoutedEventArgs e)
     {
-        WindowBike windowBike = new WindowBike(customerBikeManager, true);
+        WindowBike windowBike = new WindowBike(customerBikeManager, this, true);
 
         BikeUI bike = (BikeUI)BikeDataGrid.SelectedItem;
         if (bike == null) MessageBox.Show("No selection", "Bike");
         else
         {
-            windowBike.Bike= bike;
-
+            windowBike.Bike = bike;
             windowBike.ShowDialog();
         }
     }

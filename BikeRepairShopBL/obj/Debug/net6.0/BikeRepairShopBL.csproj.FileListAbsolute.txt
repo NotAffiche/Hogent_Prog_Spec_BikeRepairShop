@@ -10,3 +10,27 @@ D:\HoGent\Programming\repos\Specialisatie\SolutionBikeRepairShopDinsdag\BikeRepa
 D:\HoGent\Programming\repos\Specialisatie\SolutionBikeRepairShopDinsdag\BikeRepairShopBL\obj\Debug\net6.0\refint\BikeRepairShopBL.dll
 D:\HoGent\Programming\repos\Specialisatie\SolutionBikeRepairShopDinsdag\BikeRepairShopBL\obj\Debug\net6.0\BikeRepairShopBL.pdb
 D:\HoGent\Programming\repos\Specialisatie\SolutionBikeRepairShopDinsdag\BikeRepairShopBL\obj\Debug\net6.0\ref\BikeRepairShopBL.dll
+C:\Users\Adrian\Desktop\Prog Spec EXA\Hogent_Prog_Spec_BikeRepairShop\BikeRepairShopBL\bin\Debug\net6.0\BikeRepairShopBL.deps.json
+C:\Users\Adrian\Desktop\Prog Spec EXA\Hogent_Prog_Spec_BikeRepairShop\BikeRepairShopBL\bin\Debug\net6.0\BikeRepairShopBL.dll
+C:\Users\Adrian\Desktop\Prog Spec EXA\Hogent_Prog_Spec_BikeRepairShop\BikeRepairShopBL\bin\Debug\net6.0\BikeRepairShopBL.pdb
+C:\Users\Adrian\Desktop\Prog Spec EXA\Hogent_Prog_Spec_BikeRepairShop\BikeRepairShopBL\obj\Debug\net6.0\BikeRepairShopBL.csproj.AssemblyReference.cache
+C:\Users\Adrian\Desktop\Prog Spec EXA\Hogent_Prog_Spec_BikeRepairShop\BikeRepairShopBL\obj\Debug\net6.0\BikeRepairShopBL.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Adrian\Desktop\Prog Spec EXA\Hogent_Prog_Spec_BikeRepairShop\BikeRepairShopBL\obj\Debug\net6.0\BikeRepairShopBL.AssemblyInfoInputs.cache
+C:\Users\Adrian\Desktop\Prog Spec EXA\Hogent_Prog_Spec_BikeRepairShop\BikeRepairShopBL\obj\Debug\net6.0\BikeRepairShopBL.AssemblyInfo.cs
+C:\Users\Adrian\Desktop\Prog Spec EXA\Hogent_Prog_Spec_BikeRepairShop\BikeRepairShopBL\obj\Debug\net6.0\BikeRepairShopBL.csproj.CoreCompileInputs.cache
+C:\Users\Adrian\Desktop\Prog Spec EXA\Hogent_Prog_Spec_BikeRepairShop\BikeRepairShopBL\obj\Debug\net6.0\BikeRepairShopBL.dll
+C:\Users\Adrian\Desktop\Prog Spec EXA\Hogent_Prog_Spec_BikeRepairShop\BikeRepairShopBL\obj\Debug\net6.0\refint\BikeRepairShopBL.dll
+C:\Users\Adrian\Desktop\Prog Spec EXA\Hogent_Prog_Spec_BikeRepairShop\BikeRepairShopBL\obj\Debug\net6.0\BikeRepairShopBL.pdb
+C:\Users\Adrian\Desktop\Prog Spec EXA\Hogent_Prog_Spec_BikeRepairShop\BikeRepairShopBL\obj\Debug\net6.0\ref\BikeRepairShopBL.dll
+C:\Users\Adrian\Desktop\Prog EXA\Hogent_Prog_Spec_BikeRepairShop\BikeRepairShopBL\bin\Debug\net6.0\BikeRepairShopBL.deps.json
+C:\Users\Adrian\Desktop\Prog EXA\Hogent_Prog_Spec_BikeRepairShop\BikeRepairShopBL\bin\Debug\net6.0\BikeRepairShopBL.dll
+C:\Users\Adrian\Desktop\Prog EXA\Hogent_Prog_Spec_BikeRepairShop\BikeRepairShopBL\bin\Debug\net6.0\BikeRepairShopBL.pdb
+C:\Users\Adrian\Desktop\Prog EXA\Hogent_Prog_Spec_BikeRepairShop\BikeRepairShopBL\obj\Debug\net6.0\BikeRepairShopBL.csproj.AssemblyReference.cache
+C:\Users\Adrian\Desktop\Prog EXA\Hogent_Prog_Spec_BikeRepairShop\BikeRepairShopBL\obj\Debug\net6.0\BikeRepairShopBL.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Adrian\Desktop\Prog EXA\Hogent_Prog_Spec_BikeRepairShop\BikeRepairShopBL\obj\Debug\net6.0\BikeRepairShopBL.AssemblyInfoInputs.cache
+C:\Users\Adrian\Desktop\Prog EXA\Hogent_Prog_Spec_BikeRepairShop\BikeRepairShopBL\obj\Debug\net6.0\BikeRepairShopBL.AssemblyInfo.cs
+C:\Users\Adrian\Desktop\Prog EXA\Hogent_Prog_Spec_BikeRepairShop\BikeRepairShopBL\obj\Debug\net6.0\BikeRepairShopBL.csproj.CoreCompileInputs.cache
+C:\Users\Adrian\Desktop\Prog EXA\Hogent_Prog_Spec_BikeRepairShop\BikeRepairShopBL\obj\Debug\net6.0\BikeRepairShopBL.dll
+C:\Users\Adrian\Desktop\Prog EXA\Hogent_Prog_Spec_BikeRepairShop\BikeRepairShopBL\obj\Debug\net6.0\refint\BikeRepairShopBL.dll
+C:\Users\Adrian\Desktop\Prog EXA\Hogent_Prog_Spec_BikeRepairShop\BikeRepairShopBL\obj\Debug\net6.0\BikeRepairShopBL.pdb
+C:\Users\Adrian\Desktop\Prog EXA\Hogent_Prog_Spec_BikeRepairShop\BikeRepairShopBL\obj\Debug\net6.0\ref\BikeRepairShopBL.dll

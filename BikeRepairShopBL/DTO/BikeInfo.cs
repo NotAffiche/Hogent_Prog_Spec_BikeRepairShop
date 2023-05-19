@@ -26,4 +26,19 @@ public class BikeInfo
     public double PurchaseCost { get; set; }
     //data from customer
     public (int id,string custDesc) Customer { get; set; } //tuple -> id, customer info (name, email)
+
+    public override bool Equals(object? obj)
+    {
+        return obj is BikeInfo info &&
+               Id == info.Id &&
+               Description == info.Description &&
+               BikeType == info.BikeType &&
+               PurchaseCost == info.PurchaseCost &&
+               Customer.Equals(info.Customer);
+    }
+
+    public override int GetHashCode()
+    {
+        return HashCode.Combine(Id, Description, BikeType, PurchaseCost, Customer);
+    }
 }

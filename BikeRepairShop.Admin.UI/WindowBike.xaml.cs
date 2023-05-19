@@ -27,26 +27,18 @@ namespace BikeRepairShop.Admin.UI
         public BikeUI Bike { get; set; }
         private bool update;
         private CustomerBikeManager customerBikeManager;
-        public WindowBike(CustomerBikeManager customerBikeManager, bool update=false)
+        private MainWindow parentWindow;
+
+        public WindowBike(CustomerBikeManager customerBikeManager, MainWindow parent, bool update=false)
         {
             InitializeComponent();
+            parentWindow = parent;
             this.customerBikeManager= customerBikeManager;
             CBBikeType.ItemsSource = Enum.GetValues(typeof(BikeType)).Cast<BikeType>();
             CBCustomer.SelectedIndex = 0;
             CBBikeType.SelectedIndex = 0;
             TBId.IsReadOnly = true;
             this.update = update;
-            if (!update)
-            {
-                TBCustomer.Visibility = Visibility.Collapsed;
-                CBCustomer.Visibility = Visibility.Visible;
-            }
-            else
-            {
-                TBCustomer.Visibility = Visibility.Visible;
-                CBCustomer.Visibility = Visibility.Collapsed;
-                TBId.Text = "<generated>";
-            }
         }
 
         private void CancelBikeButton_Click(object sender, RoutedEventArgs e)
@@ -56,32 +48,51 @@ namespace BikeRepairShop.Admin.UI
 
         private void SaveBikeButton_Click(object sender, RoutedEventArgs e)
         {
-            if(update)
-            {
-                //customerManager.UpdateBike();
-                Bike.Description = TBDescription.Text;
-                Bike.BikeType = (BikeType)CBBikeType.SelectedItem;
-                Bike.PurchaseCost = double.Parse(TBPurchaseCost.Text);
+            Bike.Description = TBDescription.Text;
+            Bike.BikeType = (BikeType)CBBikeType.SelectedItem;
+            Bike.PurchaseCost = double.Parse(TBPurchaseCost.Text);
+            if (update)
+            {//update
+                customerBikeManager.UpdateBike(BikeMapper.ToDTO(Bike));
             }
-            else//add
-            {
-                //TODO: save to DL
-                //Bike = new BikeUI(69, "meat rub", BikeType.regularBike, 420.69, 4, "Adrian (a@b.c)");
-                customerBikeManager.AddBike(BikeMapper.ToDTO(Bike));
+            else
+            {//add
+                if (CBCustomer.SelectedItem is CustomerUI selectedCustomer)
+                {
+                    Bike.CustomerId = (int)selectedCustomer.ID;
+                    Bike.CustomerDesc = $"{selectedCustomer.Name} ({selectedCustomer.Email})";
+                    customerBikeManager.AddBike(BikeMapper.ToDTO(Bike));
+                    DialogResult = true;
+                    parentWindow.LoadGrids();
+                    Close();
+                }
+                else
+                {
+                    MessageBox.Show("No customer selected", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             }
-            DialogResult = true;
-            Close();
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             if (update)
             {
-                TBCustomer.Text = "jos";
                 CBBikeType.SelectedItem = Bike.BikeType;
                 TBDescription.Text= Bike.Description;
                 TBId.Text = Bike.Id.ToString();
                 TBPurchaseCost.Text = Bike.PurchaseCost.ToString();
+                TBCustomer.Visibility = Visibility.Visible;
+                CBCustomer.Visibility = Visibility.Collapsed;
+                TBCustomer.Text = customerBikeManager.GetCustomer(Bike.CustomerId).Name;
+            }
+            else
+            {
+                CBCustomer.DisplayMemberPath = "Name";
+                CBCustomer.SelectedValuePath = "Id";
+                CBCustomer.ItemsSource = parentWindow.customers;
+                TBCustomer.Visibility = Visibility.Collapsed;
+                CBCustomer.Visibility = Visibility.Visible;
+                TBId.Text = "<generated>";
             }
         }
     }

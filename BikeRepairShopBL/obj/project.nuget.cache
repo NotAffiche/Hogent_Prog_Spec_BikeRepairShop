@@ -1,12 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "QXDfHiLuwHnm8tNjdeybO8UKHtVD4mKEFv4/qnyP5WJtYRcMYdg0VDyc4dXl7n3900MQ1r0yWIjTC8UiqdJpoA==",
+  "dgSpecHash": "2xtj7UD4QHBOUJclu29DfwyIEqzXuIEfEhedhmaRW/zTWXaNrRCqU3rZ0RKC1zBdmcMo51VjIRc+FzTTx5ZQKQ==",
   "success": true,
-  "projectFilePath": "D:\\HoGent\\Programming\\repos\\Specialisatie\\SolutionBikeRepairShopDinsdag\\BikeRepairShopBL\\BikeRepairShopBL.csproj",
-  "expectedPackageFiles": [
-    "C:\\Users\\adria\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\6.0.16\\microsoft.windowsdesktop.app.ref.6.0.16.nupkg.sha512",
-    "C:\\Users\\adria\\.nuget\\packages\\microsoft.netcore.app.ref\\6.0.16\\microsoft.netcore.app.ref.6.0.16.nupkg.sha512",
-    "C:\\Users\\adria\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\6.0.16\\microsoft.aspnetcore.app.ref.6.0.16.nupkg.sha512"
-  ],
+  "projectFilePath": "C:\\Users\\Adrian\\Desktop\\Prog EXA\\Hogent_Prog_Spec_BikeRepairShop\\BikeRepairShopBL\\BikeRepairShopBL.csproj",
+  "expectedPackageFiles": [],
   "logs": []
 }
