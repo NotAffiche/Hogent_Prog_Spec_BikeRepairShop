@@ -6,7 +6,7 @@ namespace BikeRepairShopTest;
 
 public class CustomerTest : IDisposable
 {
-    Customer customerTestCase;
+    Repairman customerTestCase;
     Bike bikeA;
     Bike bikeB;
     Bike bikeC;

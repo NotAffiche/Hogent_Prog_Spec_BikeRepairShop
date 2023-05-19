@@ -16,3 +16,12 @@ CREATE TABLE [dbo].[Bike] (
     PRIMARY KEY CLUSTERED ([Id] ASC),
     FOREIGN KEY ([CustomerId]) REFERENCES [dbo].[Customer] ([Id])
 );
+
+CREATE TABLE [dbo].[Repairman] (
+    [Id]          INT           IDENTITY (1, 1) NOT NULL,
+    [Name]        VARCHAR (500) NOT NULL,
+    [Email]       VARCHAR (500) NOT NULL,
+    [CostPerHour] FLOAT (53)    NOT NULL,
+    [Status]      INT           NOT NULL,
+    PRIMARY KEY CLUSTERED ([Id] ASC)
+);

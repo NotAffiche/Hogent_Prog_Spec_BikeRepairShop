@@ -34,9 +34,9 @@
                 <DataGrid Name="RepairmenDataGrid">
                     <DataGrid.ContextMenu>
                         <ContextMenu>
-                            <MenuItem Header="Add"></MenuItem>
-                            <MenuItem Header="Delete"></MenuItem>
-                            <MenuItem Header="Update"></MenuItem>
+                            <MenuItem Header="Add" Click="MenuItemAddRepairman_Click"></MenuItem>
+                            <MenuItem Header="Delete" Click="MenuItemDeleteRepairman_Click"></MenuItem>
+                            <MenuItem Header="Update" Click="MenuItemUpdateRepairman_Click"></MenuItem>
                         </ContextMenu>
                     </DataGrid.ContextMenu>
                 </DataGrid>

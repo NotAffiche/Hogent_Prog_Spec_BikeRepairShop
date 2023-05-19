@@ -56,7 +56,7 @@ public class RepairmanManager
         }
         catch (Exception ex) { throw new ManagerException("RepairmanManager get rep email", ex); }
     }
-    public void UpdateCustomer(RepairmanInfo ri)
+    public void UpdateRepairman(RepairmanInfo ri)
     {
         try
         {
@@ -70,7 +70,7 @@ public class RepairmanManager
         }
         catch (Exception ex) { throw new ManagerException("RepairmanManager Update rep", ex); }
     }
-    public void DeleteCustomer(RepairmanInfo ri)
+    public void DeleteRepairman(RepairmanInfo ri)
     {
         try
         {

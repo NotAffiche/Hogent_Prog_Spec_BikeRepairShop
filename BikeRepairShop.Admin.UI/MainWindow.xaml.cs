@@ -30,9 +30,12 @@ public partial class MainWindow : Window
 {
     private CustomerBikeManager customerBikeManager;
     private CustomerBikeRepository customerBikeRepo;
+    private RepairmanManager repairmanManager;
+    private RepairmanRepository repairmanRepository;
 
     public ObservableCollection<BikeUI> bikes;
     public ObservableCollection<CustomerUI> customers;
+    public ObservableCollection<RepairmanUI> repairmen;
 
     public MainWindow()
     {
@@ -42,6 +45,8 @@ public partial class MainWindow : Window
         string conn = ConfigurationManager.ConnectionStrings["ADOconnSQL"].ConnectionString;
         customerBikeRepo = new CustomerBikeRepository(conn);
         customerBikeManager = new CustomerBikeManager(customerBikeRepo);
+        repairmanRepository = new RepairmanRepository(conn);
+        repairmanManager = new RepairmanManager(repairmanRepository);
         LoadGrids();
     }
 
@@ -49,8 +54,10 @@ public partial class MainWindow : Window
     {
         bikes = new ObservableCollection<BikeUI>(customerBikeManager.GetBikesInfo().Select(x => new BikeUI(x.Id, x.Description, x.BikeType, x.PurchaseCost, x.Customer.id, x.Customer.custDesc)));
         customers = new ObservableCollection<CustomerUI>(customerBikeManager.GetCustomersInfo().Select(x => new CustomerUI(x.Id, x.Name, x.Email, x.Address, x.NrOfBikes, x.TotalBikeValues)));
+        repairmen = new ObservableCollection<RepairmanUI>(repairmanManager.GetRepairmanInfos().Select(x=>new RepairmanUI(x.Id, x.Name, x.Email, x.CostPerHour)));
         BikeDataGrid.ItemsSource = bikes;
         CustomerDataGrid.ItemsSource = customers;
+        RepairmenDataGrid.ItemsSource = repairmen;
     }
 
     #region customers
@@ -125,6 +132,38 @@ public partial class MainWindow : Window
     #endregion
 
     #region repairmen
+    private void MenuItemAddRepairman_Click(object sender, RoutedEventArgs e)
+    {
+        WindowRepairman windowRepairman = new WindowRepairman(repairmanManager, this);
+        windowRepairman.Repairman = new RepairmanUI();
+        windowRepairman.ShowDialog();
+    }
+    private void MenuItemDeleteRepairman_Click(object sender, RoutedEventArgs e)
+    {
+        RepairmanUI repairman = (RepairmanUI)BikeDataGrid.SelectedItem;
+        if (repairman == null) MessageBox.Show("No selection", "Repairman");
+        else
+        {
+            if (MessageBox.Show("Are you sure?", "Delete repairman", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+            {
+                RepairmanUI repairmanUI = (RepairmanUI)RepairmenDataGrid.SelectedItem;
+                repairmanManager.DeleteRepairman(RepairmanMapper.ToDTO(repairmanUI));
+            }
+        }
+        LoadGrids();
+    }
+    private void MenuItemUpdateRepairman_Click(object sender, RoutedEventArgs e)
+    {
+        WindowRepairman repairmanWindow = new WindowRepairman(repairmanManager, this, true);
+
+        RepairmanUI repairman = (RepairmanUI)RepairmenDataGrid.SelectedItem;
+        if (repairman == null) MessageBox.Show("No selection", "Bike");
+        else
+        {
+            repairmanWindow.Repairman = repairman;
+            repairmanWindow.ShowDialog();
+        }
+    }
     #endregion
 
     private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)

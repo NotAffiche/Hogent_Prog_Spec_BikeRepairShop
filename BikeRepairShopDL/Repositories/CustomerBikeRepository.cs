@@ -64,7 +64,7 @@ public class CustomerBikeRepository : ICustomerBikeRepository
                 command.Parameters.AddWithValue("@purchasecost", bike.PurchaseCost);
                 if (bike.Description != null) command.Parameters.AddWithValue("@description", bike.Description);
                 else command.Parameters.AddWithValue("@description", DBNull.Value);
-                command.Parameters.AddWithValue("@customerid", bike.Customer.ID);
+                command.Parameters.AddWithValue("@customerid", (object?)bike.Customer.ID);
                 command.Parameters.AddWithValue("@status", 1);
                 int bid = (int)command.ExecuteScalar();
                 bike.SetId(bid);
@@ -127,7 +127,7 @@ public class CustomerBikeRepository : ICustomerBikeRepository
                 command.ExecuteNonQuery();
             }
         }
-        catch (Exception ex) { throw new RepositoryException("DeleteCustomer", ex); }
+        catch (Exception ex) { throw new RepositoryException("DeleteBike", ex); }
     }
     public void DeleteCustomer(Customer customer)
     {
@@ -266,7 +266,7 @@ public class CustomerBikeRepository : ICustomerBikeRepository
                 command.Parameters.AddWithValue("@purchasecost", bike.PurchaseCost);
                 if (bike.Description != null) command.Parameters.AddWithValue("@description", bike.Description);
                 else command.Parameters.AddWithValue("@description", DBNull.Value);
-                command.Parameters.AddWithValue("@customerid", bike.Customer.ID);
+                command.Parameters.AddWithValue("@customerid", (object?)bike.Customer.ID);
                 command.Parameters.AddWithValue("@id", bike.ID);
                 command.ExecuteNonQuery();
             }
