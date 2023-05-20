@@ -15,7 +15,7 @@ public class BikeUI : INotifyPropertyChanged
 
     }
     public BikeUI(int? id, string desc, BikeType bikeType, double purchaseCost, int custId, string custDesc) {
-        Id = id;
+        ID = id;
         Description = desc;
         BikeType = bikeType;
         PurchaseCost = purchaseCost;
@@ -23,7 +23,7 @@ public class BikeUI : INotifyPropertyChanged
         CustomerDesc = custDesc;
     }
 
-    public int? Id { get; set; }
+    public int? ID { get; set; }
     //
     private string _description;
     public string Description { get { return _description; } set { _description = value; OnPropertyChanged(); } }
@@ -33,6 +33,7 @@ public class BikeUI : INotifyPropertyChanged
     public double PurchaseCost { get { return _purchaseCost; } set { _purchaseCost = value; OnPropertyChanged(); } }
     public int CustomerId { get; set; }
     public string CustomerDesc { get; set; }
+    public string DisplayName => $"{BikeType.ToString()} ({Description})";
 
     public event PropertyChangedEventHandler? PropertyChanged;
     private void OnPropertyChanged(string name=null)

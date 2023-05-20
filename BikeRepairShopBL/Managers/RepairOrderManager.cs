@@ -1,6 +1,7 @@
 ﻿using BikeRepairShopBL.Domain;
 using BikeRepairShopBL.DTO;
 using BikeRepairShopBL.Exceptions;
+using BikeRepairShopBL.Factories;
 using BikeRepairShopBL.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -13,10 +14,14 @@ namespace BikeRepairShopBL.Managers;
 public class RepairOrderManager
 {
     private IRepairOrderRepository repo;
+    private ICustomerBikeRepository customerBikeRepo;
+    private IRepairmanRepository repairmanRepo;
 
-    public RepairOrderManager(IRepairOrderRepository repo)
+    public RepairOrderManager(IRepairOrderRepository repo, ICustomerBikeRepository customerBikeRepo, IRepairmanRepository repairmanRepo)
     {
         this.repo = repo;
+        this.customerBikeRepo = customerBikeRepo;
+        this.repairmanRepo= repairmanRepo;
     }
 
     //
@@ -24,7 +29,7 @@ public class RepairOrderManager
     {
         try
         {
-            return repo.GetRepairOrderInfos(c);
+            return repo.GetRepairOrderInfos((int)c.Id!);
         }
         catch (Exception ex) { throw new ManagerException("RepairOrder get rep order infos", ex); }
     }
@@ -43,5 +48,66 @@ public class RepairOrderManager
             return repo.GetRepairTaskInfos();
         }
         catch (Exception ex) { throw new ManagerException("RepairOrder get rtaskinfos", ex); }
+    }
+
+    public void AddRepairOrder(RepairOrderInfo roInfo)
+    {
+        try
+        {
+            if (roInfo == null) throw new ManagerException("RepairOrderManager AddRO roInfo null");
+            RepairOrder ro = DomainFactory.NewRepairOrder(roInfo, customerBikeRepo.GetCustomer((int)roInfo.Customer.id!));
+            repo.AddRepairOrder(ro);
+            roInfo.ID = ro.ID;
+        }
+        catch (Exception ex) { throw new ManagerException("RepairOrder add ro", ex); }
+    }
+    public void AddRepairOrderItem(RepairOrderItemInfo roiInfo)
+    {
+        try
+        {
+            if (roiInfo == null) throw new ManagerException("RepairOrderManager AddROI roiInfo null");
+            RepairOrder ro = repo.GetRepairOrder(roiInfo.RepairOrder.RepairOrderId);
+            Bike bike = customerBikeRepo.GetBike(roiInfo.Bike.BikeId);
+            RepairTask rt = repo.GetRepairTask(roiInfo.RepairTask.RepairTaskId);
+            Repairman rm = repairmanRepo.GetRepairman(roiInfo.Repairman.RepairmanId);
+            RepairOrderItem roi = DomainFactory.NewRepairOrderItem(roiInfo, ro, bike, rt, rm);
+            repo.AddRepairOrderItem(roi);
+            roiInfo.ID = roi.ID;
+        }
+        catch (Exception ex) { throw new ManagerException("RepairOrder add roi", ex); }
+    }
+
+    public void RemoveRepairOrder(RepairOrder ro)
+    {
+        try
+        {
+            repo.RemoveRepairOrder(ro);
+        }
+        catch (Exception ex) { throw new ManagerException("RepairOrder remove ro", ex); }
+    }
+    public void RemoveRepairOrderItem(RepairOrderItem roi)
+    {
+        try
+        {
+            repo.RemoveRepairOrderItem(roi);
+        }
+        catch (Exception ex) { throw new ManagerException("RepairOrder remove roi", ex); }
+    }
+
+    public void UpdateRepairOrder(RepairOrder ro)
+    {
+        try
+        {
+            repo.UpdateRepairOrder(ro);
+        }
+        catch (Exception ex) { throw new ManagerException("RepairOrder update ro", ex); }
+    }
+    public void UpdateRepairOrderItem(RepairOrderItem roi)
+    {
+        try
+        {
+            repo.UpdateRepairOrderItem(roi);
+        }
+        catch (Exception ex) { throw new ManagerException("RepairOrder update roi", ex); }
     }
 }

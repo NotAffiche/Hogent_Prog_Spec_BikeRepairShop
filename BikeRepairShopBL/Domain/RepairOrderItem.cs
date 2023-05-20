@@ -9,7 +9,7 @@ namespace BikeRepairShopBL.Domain;
 
 public class RepairOrderItem
 {
-    internal RepairOrderItem(int id, RepairOrder ro, Bike bike, RepairTask rt, Repairman rm)
+    internal RepairOrderItem(int? id, RepairOrder ro, Bike bike, RepairTask rt, Repairman rm)
     {
         SetId(id);
         SetRepairOrder(ro);
@@ -24,8 +24,9 @@ public class RepairOrderItem
     public RepairTask RepairTask { get; private set; }
     public Repairman Repairman { get; private set; }
 
-    public void SetId(int id)
+    public void SetId(int? id)
     {
+        //if (!id.HasValue) throw new DomainException("RepairOrderItem null id");
         if (id <= 0) throw new DomainException("RepairOrderItem id");
         ID = id;
     }

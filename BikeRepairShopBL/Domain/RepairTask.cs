@@ -14,19 +14,19 @@ public class RepairTask
     public int RepairTime { get; private set; }
     public double CostMaterials { get; private set; }
 
-    internal RepairTask(string desc, int reptime, double cph)
+    internal RepairTask(string desc, int reptime, double matcost)
     {
         SetName(desc);
         SetRepairTime(reptime);
-        SetCostPerHour(cph);
+        SetMatCost(matcost);
     }
 
-    internal RepairTask(int? id, string desc, int reptime, double cph)
+    internal RepairTask(int? id, string desc, int reptime, double matcost)
     {
         if (id.HasValue) SetId((int)id);
         SetName(desc);
         SetRepairTime(reptime);
-        SetCostPerHour(cph);
+        SetMatCost(matcost);
     }
 
     public void SetId(int id)
@@ -44,7 +44,7 @@ public class RepairTask
         if (reptime <= 0) throw new DomainException("RepairTask reptime");
         RepairTime = reptime;
     }
-    public void SetCostPerHour(double cmat)
+    public void SetMatCost(double cmat)
     {
         if (cmat < 0) throw new DomainException("RepairTask cost mat");
         CostMaterials = cmat;

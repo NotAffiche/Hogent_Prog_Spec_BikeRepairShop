@@ -12,6 +12,6 @@ public static class BikeMapper
 {
     public static BikeInfo ToDTO(BikeUI bikeUI)
     {
-        return new BikeInfo(bikeUI.Id, bikeUI.Description, bikeUI.BikeType, bikeUI.PurchaseCost, bikeUI.CustomerId, bikeUI.CustomerDesc);
+        return new BikeInfo(bikeUI.ID, bikeUI.Description, bikeUI.BikeType, bikeUI.PurchaseCost, bikeUI.CustomerId, bikeUI.CustomerDesc);
     }
 }

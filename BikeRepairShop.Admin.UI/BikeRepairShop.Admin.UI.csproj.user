@@ -19,6 +19,9 @@
     <Compile Update="WindowRepairOrder.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="WindowRepairOrderItem.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Page Update="MainWindow.xaml">
@@ -34,6 +37,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="WindowRepairOrder.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="WindowRepairOrderItem.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

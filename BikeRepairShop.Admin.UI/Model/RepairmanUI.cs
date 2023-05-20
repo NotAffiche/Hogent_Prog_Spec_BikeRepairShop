@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BikeRepairShopBL.Domain;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -28,6 +29,7 @@ public class RepairmanUI : INotifyPropertyChanged
     public string Email { get { return _email; } set { _email = value; OnPropertyChanged(); } }
     private double _costPerHour;
     public double CostPerHour { get { return _costPerHour; } set { _costPerHour = value; OnPropertyChanged(); } }
+    public string DisplayName => $"{Name} (${CostPerHour}/hr)";
 
     //event
     public event PropertyChangedEventHandler? PropertyChanged;

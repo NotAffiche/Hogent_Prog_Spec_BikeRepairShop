@@ -28,7 +28,7 @@ public class RepairOrder
 
     public void SetId(int? id)
     {
-        if (!id.HasValue) throw new DomainException("RepairOrder null id");
+        //if (!id.HasValue) throw new DomainException("RepairOrder null id");
         if (id <= 0) throw new DomainException("RepairOrder id");
         ID = id;
     }

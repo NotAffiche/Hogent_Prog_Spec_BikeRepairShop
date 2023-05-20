@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BikeRepairShopBL.Domain;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -28,6 +29,7 @@ public class RepairTaskUI : INotifyPropertyChanged
     public int RepairTime { get { return _repairTime; } set { _repairTime = value; OnPropertyChanged(); } }
     private double _costMaterials;
     public double CostMaterials { get { return _costMaterials; } set { _costMaterials = value; OnPropertyChanged(); } }
+    public string DisplayName => $"{Description} (T: {RepairTime}min) [${CostMaterials} in materials]";
 
     //event
     public event PropertyChangedEventHandler? PropertyChanged;

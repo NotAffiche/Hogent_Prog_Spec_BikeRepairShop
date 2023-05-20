@@ -79,7 +79,7 @@ namespace BikeRepairShop.Admin.UI
             {
                 CBBikeType.SelectedItem = Bike.BikeType;
                 TBDescription.Text= Bike.Description;
-                TBId.Text = Bike.Id.ToString();
+                TBId.Text = Bike.ID.ToString();
                 TBPurchaseCost.Text = Bike.PurchaseCost.ToString();
                 TBCustomer.Visibility = Visibility.Visible;
                 CBCustomer.Visibility = Visibility.Collapsed;
@@ -88,7 +88,7 @@ namespace BikeRepairShop.Admin.UI
             else
             {
                 CBCustomer.DisplayMemberPath = "Name";
-                CBCustomer.SelectedValuePath = "Id";
+                CBCustomer.SelectedValuePath = "ID";
                 CBCustomer.ItemsSource = parentWindow.customers;
                 TBCustomer.Visibility = Visibility.Collapsed;
                 CBCustomer.Visibility = Visibility.Visible;

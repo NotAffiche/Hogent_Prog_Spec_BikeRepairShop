@@ -28,9 +28,9 @@ namespace BikeRepairShop.Admin.UI;
 /// </summary>
 public partial class MainWindow : Window
 {
-    private CustomerBikeManager customerBikeManager;
-    private RepairmanManager repairmanManager;
-    private RepairOrderManager repairOrderManager;
+    public CustomerBikeManager customerBikeManager;
+    public RepairmanManager repairmanManager;
+    public RepairOrderManager repairOrderManager;
 
     public ObservableCollection<BikeUI> bikes;
     public ObservableCollection<CustomerUI> customers;
@@ -47,7 +47,7 @@ public partial class MainWindow : Window
         string conn = ConfigurationManager.ConnectionStrings["ADOconnSQL"].ConnectionString;
         customerBikeManager = new CustomerBikeManager(new CustomerBikeRepository(conn));
         repairmanManager = new RepairmanManager(new RepairmanRepository(conn));
-        repairOrderManager = new RepairOrderManager(new RepairOrderRepository(conn));
+        repairOrderManager = new RepairOrderManager(new RepairOrderRepository(conn), new CustomerBikeRepository(conn), new RepairmanRepository(conn));
         LoadGrids();
     }
 
@@ -248,7 +248,7 @@ public partial class MainWindow : Window
         WindowRepairOrder windowRepairOrder = new WindowRepairOrder(repairOrderManager, this, (CustomerUI)CBCustomer.SelectedItem, true);
 
         RepairOrderUI repairOrder = (RepairOrderUI)RepairOrdersDataGrid.SelectedItem;
-        if (repairOrder == null) MessageBox.Show("No selection", "Repair Order");
+        if (repairOrder == null) MessageBox.Show("No selection", "Repair Order item");
         else
         {
             windowRepairOrder.cUI = (CustomerUI)CBCustomer.SelectedItem;
@@ -260,9 +260,16 @@ public partial class MainWindow : Window
     //repairorder items
     private void MenuItemAddRepairOrderItem_Click(object sender, RoutedEventArgs e)
     {
-        //WindowRepairman windowRepairman = new WindowRepairman(repairmanManager, this);
-        //windowRepairman.Repairman = new RepairmanUI();
-        //windowRepairman.ShowDialog();
+        if ((CustomerUI)CBCustomer.SelectedItem != null)
+        {
+            WindowRepairOrderItem windowRepairOrderItem = new WindowRepairOrderItem(repairOrderManager, this, (CustomerUI)CBCustomer.SelectedItem, (RepairOrderUI)RepairOrdersDataGrid.SelectedItem);
+            windowRepairOrderItem.RepairOrderItem = new RepairOrderItemUI();
+            windowRepairOrderItem.Show();
+        }
+        else
+        {
+            MessageBox.Show("Select a customer and repairorder", "Repair Order");
+        }
     }
     private void MenuItemDeleteRepairOrderItem_Click(object sender, RoutedEventArgs e)
     {
@@ -280,6 +287,16 @@ public partial class MainWindow : Window
     }
     private void MenuItemUpdateRepairOrderItem_Click(object sender, RoutedEventArgs e)
     {
+        WindowRepairOrderItem windowRepairOrderItem = new WindowRepairOrderItem(repairOrderManager, this, (CustomerUI)CBCustomer.SelectedItem, (RepairOrderUI)RepairOrdersDataGrid.SelectedItem, true);
+
+        RepairOrderItemUI repairOrderItem = (RepairOrderItemUI)RepairOrderItemsDataGrid.SelectedItem;
+        if (repairOrderItem == null) MessageBox.Show("No selection", "Repair Order Item");
+        else
+        {
+            windowRepairOrderItem.cUI = (CustomerUI)CBCustomer.SelectedItem;
+            windowRepairOrderItem.RepairOrderItem = repairOrderItem;
+            windowRepairOrderItem.ShowDialog();
+        }
         //WindowRepairman repairmanWindow = new WindowRepairman(repairmanManager, this, true);
 
         //RepairmanUI repairman = (RepairmanUI)RepairmenDataGrid.SelectedItem;

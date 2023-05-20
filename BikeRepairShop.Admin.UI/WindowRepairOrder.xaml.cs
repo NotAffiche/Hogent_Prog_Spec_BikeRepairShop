@@ -58,7 +58,7 @@ public partial class WindowRepairOrder : Window
         else
         {//add
             RepairOrder.OrderDate = DateOnly.FromDateTime(DateTime.Now);
-            //repairOrderManager.AddRepairOrder((RepairOrderMapper.OrderToDTO(RepairOrder, cUI));
+            repairOrderManager.AddRepairOrder(RepairOrderMapper.OrderToDTO(RepairOrder, cUI));
         }
         parentWindow.LoadGrids();
         Close();
@@ -87,7 +87,7 @@ public partial class WindowRepairOrder : Window
         }
         catch
         {
-            MessageBox.Show("An error occured. Make sure to (re)select an repair order.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            MessageBox.Show("An error occured. Make sure to (re)select an repair order / customer.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
         }
     }
 }

@@ -11,6 +11,7 @@ namespace BikeRepairShopBL.Interfaces;
 public interface ICustomerBikeRepository
 {
     List<BikeInfo> GetBikesInfo();
+    List<BikeInfo> GetBikesInfo(int customerId);
     void AddBike(Bike bike);
     Customer GetCustomer(int id);
     //
@@ -21,4 +22,5 @@ public interface ICustomerBikeRepository
     List<CustomerInfo> GetCustomersInfo(string? name = null);
     void UpdateBike(Bike bike);
     void UpdateCustomer(Customer customer);
+    Bike GetBike(int id);
 }

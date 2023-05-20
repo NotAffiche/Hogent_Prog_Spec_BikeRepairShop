@@ -23,7 +23,14 @@ public class DomainFactory
     {
         try
         {
-            return new Customer(id, name, email, address, bikes, repairOrders);
+            if (bikes == null && repairOrders == null)
+            {
+                return new Customer(id, name, email, address);
+            }
+            else
+            {
+                return new Customer(id, name, email, address, bikes, repairOrders);
+            }
         }
         catch (Exception ex) { throw new DomainException("ExistingCustomer", ex); }
     }
@@ -59,5 +66,45 @@ public class DomainFactory
             return new Repairman(id, name, email, cph);
         }
         catch (Exception ex) { throw new DomainException("ExistingRepairman", ex); }
+    }
+    public static RepairOrder NewRepairOrder(RepairOrderInfo roi, Customer customer)
+    {
+        try
+        {
+            return new RepairOrder(roi.ID, (Urgency)Enum.Parse(typeof(Urgency), roi.Urgency), roi.OrderDate, customer, roi.Paid);
+        }
+        catch (Exception ex) { throw new DomainException("NewRepairOirder", ex); }
+    }
+    public static RepairOrder ExistingRepairOrder(int? id, Urgency urgency, DateOnly orderDate, Customer customer, bool paid)
+    {
+        try
+        {
+            return new RepairOrder(id, urgency, orderDate, customer, paid);
+        }
+        catch (Exception ex) { throw new DomainException("ExistingRepairman", ex); }
+    }
+    public static RepairOrderItem NewRepairOrderItem(RepairOrderItemInfo roii, RepairOrder ro, Bike bike, RepairTask rt, Repairman rm)
+    {
+        try
+        {
+            return new RepairOrderItem(roii.ID, ro, bike, rt, rm);
+        }
+        catch (Exception ex) { throw new DomainException("NewRepairOrderItem", ex); }
+    }
+    public static RepairOrderItem ExistingRepairOrderItem(int? id, RepairOrder ro, Bike bike, RepairTask rt, Repairman rm)
+    {
+        try
+        {
+            return new RepairOrderItem(id, ro, bike, rt, rm);
+        }
+        catch (Exception ex) { throw new DomainException("ExistingRepairOrderItem", ex); }
+    }
+    public static RepairTask ExistingRepairTask(int? id, string desc, int reptime, double matcost)
+    {
+        try
+        {
+            return new RepairTask(id, desc, reptime, matcost);
+        }
+        catch (Exception ex) { throw new DomainException("ExistingRepairTask", ex); }
     }
 }

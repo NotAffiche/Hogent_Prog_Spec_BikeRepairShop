@@ -27,6 +27,17 @@ public class CustomerBikeManager
             throw new ManagerException("GetBikesInfo", ex);
         }
     }
+    public List<BikeInfo> GetBikesInfo(int customerId)
+    {
+        try
+        {
+            return repo.GetBikesInfo(customerId);
+        }
+        catch (Exception ex)
+        {
+            throw new ManagerException("GetBikesInfo", ex);
+        }
+    }
     public void AddBike(BikeInfo bikeInfo)
     {
         try

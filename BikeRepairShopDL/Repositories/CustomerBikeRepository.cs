@@ -50,6 +50,40 @@ public class CustomerBikeRepository : ICustomerBikeRepository
             throw new RepositoryException("CustomerBikeRepo-GetBikesInfo", ex);
         }
     }
+    public List<BikeInfo> GetBikesInfo(int customerId)
+    {
+        List<BikeInfo> bikeInfos = new List<BikeInfo>();
+        try
+        {
+            string sql = "SELECT b.*, c.Name, c.Email FROM Bike b INNER JOIN Customer c ON b.CustomerId=c.Id WHERE b.Status=1 AND c.Status=1 AND c.Id=@id;";
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            using (SqlCommand cmd = conn.CreateCommand())
+            {
+                conn.Open();
+                cmd.CommandText = sql;
+                cmd.Parameters.AddWithValue("@id", customerId);
+                IDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    //string d = reader.IsDBNull(reader.GetOrdinal("description")) ? null : (string)reader["description"];
+                    //Enum.Parse(typeof(BikeInfo), (string)reader["biketype"], true);
+                    bikeInfos.Add(
+                        new BikeInfo(
+                            (int)reader["id"],
+                        reader.IsDBNull(reader.GetOrdinal("description")) ? null : (string)reader["description"],
+                        (BikeType)Enum.Parse(typeof(BikeType), (string)reader["biketype"], true),
+                        (double)reader["purchasecost"], (int)reader["customerid"],
+                        (string)reader["name"] + " (" + (string)reader["email"] + ")"));
+                }
+                reader.Close();
+            }
+            return bikeInfos;
+        }
+        catch (Exception ex)
+        {
+            throw new RepositoryException("CustomerBikeRepo-GetBikesInfo", ex);
+        }
+    }
     public void AddBike(Bike bike)
     {
         try
@@ -296,5 +330,37 @@ public class CustomerBikeRepository : ICustomerBikeRepository
             }
         }
         catch (Exception ex) { throw new RepositoryException("UpdateCustomer", ex); }
+    }
+
+    public Bike GetBike(int id)
+    {
+        try
+        {
+            string sqlC = "SELECT t1.*,t2.id bikeid,t2.biketype,t2.purchasecost,t2.description FROM customer t1 left join (select * from bike where status=1) t2 on t1.id=t2.customerid " +
+                "WHERE t1.id=@id AND t1.status=1";
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            using (SqlCommand command = connection.CreateCommand())
+            {
+                connection.Open();
+                command.CommandText = sqlC;
+                command.Parameters.AddWithValue("@id", id);
+                IDataReader reader = command.ExecuteReader();
+                BikeType bikeType = BikeType.regularBike;
+                double purchaseCost = 0;
+                string? description = null;
+                while (reader.Read())
+                {
+                    bikeType = (BikeType)Enum.Parse(typeof(BikeType), (string)reader["biketype"]);
+                    description = (string?)reader["Description"];
+                    purchaseCost = (double)reader["purchasecost"];
+                }
+                reader.Close();
+                return DomainFactory.ExistingBike(id, bikeType, purchaseCost, description);
+            }
+        }
+        catch (Exception ex)
+        {
+            throw new RepositoryException("GetBike", ex);
+        }
     }
 }
