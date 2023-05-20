@@ -24,7 +24,15 @@ public class RepairOrderManager
     {
         try
         {
-            return repo.GetRepairOrderInfos(new Customer(c.Id, c.Name, c.Email, c.Address));
+            return repo.GetRepairOrderInfos(c);
+        }
+        catch (Exception ex) { throw new ManagerException("RepairOrder get rep order infos", ex); }
+    }
+    public List<RepairOrderItemInfo> GetRepairOrderItemInfos(RepairOrderInfo roi)
+    {
+        try
+        {
+            return repo.GetRepairOrderItemInfos(roi);
         }
         catch (Exception ex) { throw new ManagerException("RepairOrder get rep order infos", ex); }
     }

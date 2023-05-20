@@ -22,7 +22,7 @@ public class RepairOrderRepository : IRepairOrderRepository
         this.connectionString = connectionString;
     }
 
-    public List<RepairOrderInfo> GetRepairOrderInfos(Customer c)
+    public List<RepairOrderInfo> GetRepairOrderInfos(CustomerInfo c)
     {
         List<RepairOrderInfo> repairOrderInfos = new List<RepairOrderInfo>();
         try
@@ -34,7 +34,7 @@ public class RepairOrderRepository : IRepairOrderRepository
             {
                 conn.Open();
                 cmd.CommandText = sql;
-                cmd.Parameters.AddWithValue("@custId", c.ID);
+                cmd.Parameters.AddWithValue("@custId", c.Id);
                 IDataReader reader = cmd.ExecuteReader();
                 while (reader.Read())
                 {
@@ -52,12 +52,12 @@ public class RepairOrderRepository : IRepairOrderRepository
         }
     }
 
-    public List<RepairOrderItemInfo> GetRepairOrderItemInfos(RepairOrder ro)
+    public List<RepairOrderItemInfo> GetRepairOrderItemInfos(RepairOrderInfo ro)
     {
         List<RepairOrderItemInfo> repairOrderItemInfos = new List<RepairOrderItemInfo>();
         try
         {
-            string sql = "SELECT * WHERE ro.Status=1 AND ro.Id=@roId;";
+            string sql = "SELECT * FROM RepairOrderItem WHERE Status=1 AND RepairOrderId=@roId;";
             using (SqlConnection conn = new SqlConnection(connectionString))
             using (SqlCommand cmd = conn.CreateCommand())
             {
@@ -67,9 +67,8 @@ public class RepairOrderRepository : IRepairOrderRepository
                 IDataReader reader = cmd.ExecuteReader();
                 while (reader.Read())
                 {
-                    DateTime dt = reader.GetDateTime(2);
-                    RepairOrderInfo roi = new RepairOrderInfo((int)reader["id"], (string)reader["urgency"], Convert.ToBoolean((int)reader["paid"]), new DateOnly(dt.Year, dt.Month, dt.Day), (int)reader["cid"], $"{(string)reader["name"]} ({(string)reader["email"]})");
-                    repairOrderItemInfos.Add(roi);
+                    RepairOrderItemInfo roii = new RepairOrderItemInfo((int)reader["id"], (int)reader["repairorderid"], (int)reader["bikeid"], (int)reader["repairtaskid"], (int)reader["repairmanid"]);
+                    repairOrderItemInfos.Add(roii);
                 }
                 reader.Close();
             }

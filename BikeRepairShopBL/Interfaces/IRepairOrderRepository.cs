@@ -11,6 +11,6 @@ namespace BikeRepairShopBL.Interfaces;
 public interface IRepairOrderRepository
 {
     List<RepairTaskInfo> GetRepairTaskInfos();
-    List<RepairOrderInfo> GetRepairOrderInfos(Customer c);
-    List<RepairOrderItemInfo> GetRepairOrderItemInfos(RepairOrder ro);
+    List<RepairOrderInfo> GetRepairOrderInfos(CustomerInfo c);
+    List<RepairOrderItemInfo> GetRepairOrderItemInfos(RepairOrderInfo ro);
 }

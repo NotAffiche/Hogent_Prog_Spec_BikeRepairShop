@@ -191,6 +191,11 @@ public partial class MainWindow : Window
     private void RepairOrdersDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
         //load repair order items for this repair order
+        RepairOrderUI roUI = (RepairOrderUI)RepairOrdersDataGrid.SelectedItem;
+        CustomerUI cUI = (CustomerUI)CBCustomer.SelectedItem;
+        RepairOrderInfo roi = new RepairOrderInfo(roUI.ID, roUI.Urgency, roUI.Paid, roUI.OrderDate, cUI.ID, $"{cUI.Name} ({cUI.Email})");
+        repairOrderItems = new ObservableCollection<RepairOrderItemUI>(repairOrderManager.GetRepairOrderItemInfos(roi).Select(x=>new RepairOrderItemUI()));
+        RepairOrderItemsDataGrid.ItemsSource = repairOrderItems;
     }
 
     private void MenuItemAddRepairOrder_Click(object sender, RoutedEventArgs e)
