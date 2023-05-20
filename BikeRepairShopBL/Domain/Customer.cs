@@ -1,4 +1,5 @@
-﻿using BikeRepairShopBL.Exceptions;
+﻿using BikeRepairShopBL.DTO;
+using BikeRepairShopBL.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,17 +10,18 @@ namespace BikeRepairShopBL.Domain;
 
 public class Customer
 {
-    internal Customer(string name, string email, string address)
+    internal Customer(int? id, string name, string email, string address)
     {
+        SetId(id);
         SetName(name);
         SetEmail(email);
         SetAddress(address);
     }
-    internal Customer(int id, string name, string email, string address, List<Bike> bikes) : this(name, email, address)
+    internal Customer(int? id, string name, string email, string address, List<Bike> bikes, List<RepairOrder> repairOrders) : this(id, name, email, address)
     {
-        SetId(id);
         this._bikes = bikes;
         foreach (Bike bike in bikes) { bike.SetCustomer(this); }
+        foreach (RepairOrder ro in repairOrders) { ro.SetCustomer(this); }
     }
 
     public int? ID { get; private set; }
@@ -28,10 +30,10 @@ public class Customer
     public string Address { get; private set; }
     private List<Bike> _bikes = new List<Bike>();
     public IReadOnlyList<Bike> GetBikes() { return _bikes.AsReadOnly(); }
-    private List<CustomerRepairOrderInfo> _customerRepairOrderInfos = new List<CustomerRepairOrderInfo>();
-    public IReadOnlyList<CustomerRepairOrderInfo> GetCustomerRepairOrderInfos() { return _customerRepairOrderInfos.AsReadOnly(); }
+    private List<RepairOrder> _repairOrders = new List<RepairOrder>();
+    public IReadOnlyList<RepairOrder> GetRepairOrders() { return _repairOrders.AsReadOnly(); }
 
-    public void SetId(int id)
+    public void SetId(int? id)
     {
         if (id <= 0) throw new DomainException("Customer id");
         ID = id;
@@ -73,5 +75,17 @@ public class Customer
         if (!_bikes.Contains(bike)) throw new DomainException("Customer delbike list doesnt contain bike");
         _bikes.Remove(bike);
     }
-
+    public void AddRepairOrder(RepairOrder ro)
+    {
+        if (ro == null) throw new DomainException("Customer addro ro null");
+        if (_repairOrders.Contains(ro)) throw new DomainException("Customer addro list already contains ro");
+        _repairOrders.Add(ro);
+        if (ro.Customer != this) ro.SetCustomer(this);
+    }
+    public void RemoveRepairOrder(RepairOrder ro)
+    {
+        if (ro == null) throw new DomainException("Customer delro ro null");
+        if (!_repairOrders.Contains(ro)) throw new DomainException("Customer delro list doesnt contain rp");
+        _repairOrders.Remove(ro);
+    }
 }

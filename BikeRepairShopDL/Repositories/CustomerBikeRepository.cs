@@ -149,7 +149,8 @@ public class CustomerBikeRepository : ICustomerBikeRepository
     {
         try
         {
-            string sqlC = "SELECT t1.*,t2.id bikeid,t2.biketype,t2.purchasecost,t2.description FROM customer t1 left join  (select * from bike where status=1) t2 on t1.id=t2.customerid WHERE t1.id=@id AND t1.status=1";
+            string sqlC = "SELECT t1.*,t2.id bikeid,t2.biketype,t2.purchasecost,t2.description FROM customer t1 left join (select * from bike where status=1) t2 on t1.id=t2.customerid " +
+                "WHERE t1.id=@id AND t1.status=1";
             using (SqlConnection connection = new SqlConnection(connectionString))
             using (SqlCommand command = connection.CreateCommand())
             {
@@ -160,6 +161,7 @@ public class CustomerBikeRepository : ICustomerBikeRepository
                 string name = null, email = null, address = null;
                 bool firstLine = true;
                 List<Bike> bikes = new List<Bike>();
+                List<RepairOrder> repairOrders = new List<RepairOrder>();
                 while (reader.Read())
                 {
                     if (firstLine)
@@ -174,9 +176,10 @@ public class CustomerBikeRepository : ICustomerBikeRepository
                         bikes.Add(DomainFactory.ExistingBike((int)reader["bikeid"], (BikeType)Enum.Parse(typeof(BikeType), (string)reader["biketype"], true), (double)reader["purchasecost"],
                            reader.IsDBNull(reader.GetOrdinal("description")) ? null : (string)reader["description"]));
                     }
+
                 }
                 reader.Close();
-                return DomainFactory.ExistingCustomer(id, name, email, address, bikes);
+                return DomainFactory.ExistingCustomer(id, name, email, address, bikes, repairOrders);
             }
         }
         catch (Exception ex) { throw new RepositoryException("GetCustomer", ex); }
@@ -185,7 +188,8 @@ public class CustomerBikeRepository : ICustomerBikeRepository
     {
         try
         {
-            string sqlC = "SELECT t1.*,t2.id bikeid,t2.biketype,t2.purchasecost,t2.description FROM customer t1 left join  (select * from bike where status=1) t2 on t1.id=t2.customerid WHERE t1.email=@email AND t1.status=1 ";
+            string sqlC = "SELECT t1.*,t2.id bikeid,t2.biketype,t2.purchasecost,t2.description FROM customer t1 left join (select * from bike where status=1) t2 on t1.id=t2.customerid " +
+                "WHERE t1.email=@email AND t1.status=1 ";
             string sqlROI = "SELECT * from repairorder WHERE customerid=@customerid and status=1";
             using (SqlConnection connection = new SqlConnection(connectionString))
             using (SqlCommand command = connection.CreateCommand())
@@ -198,6 +202,7 @@ public class CustomerBikeRepository : ICustomerBikeRepository
                 int customerid = 0;
                 bool firstLine = true;
                 List<Bike> bikes = new List<Bike>();
+                List<RepairOrder> repairOrders = new List<RepairOrder>();
                 while (reader.Read())
                 {
                     if (firstLine)
@@ -214,7 +219,7 @@ public class CustomerBikeRepository : ICustomerBikeRepository
                     }
                 }
                 reader.Close();
-                return DomainFactory.ExistingCustomer(customerid, name, email, address, bikes);
+                return DomainFactory.ExistingCustomer(customerid, name, email, address, bikes, repairOrders);
             }
         }
         catch (Exception ex) { throw new RepositoryException("GetCustomer", ex); }

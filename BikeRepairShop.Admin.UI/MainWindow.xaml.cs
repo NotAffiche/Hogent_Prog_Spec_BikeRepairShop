@@ -29,13 +29,15 @@ namespace BikeRepairShop.Admin.UI;
 public partial class MainWindow : Window
 {
     private CustomerBikeManager customerBikeManager;
-    private CustomerBikeRepository customerBikeRepo;
     private RepairmanManager repairmanManager;
-    private RepairmanRepository repairmanRepository;
+    private RepairOrderManager repairOrderManager;
 
     public ObservableCollection<BikeUI> bikes;
     public ObservableCollection<CustomerUI> customers;
     public ObservableCollection<RepairmanUI> repairmen;
+    public ObservableCollection<RepairTaskUI> repairTasks;
+    public ObservableCollection<RepairOrderUI> repairOrders;
+    public ObservableCollection<RepairOrderItemUI> repairOrderItems;
 
     public MainWindow()
     {
@@ -43,10 +45,9 @@ public partial class MainWindow : Window
         CustomerDataGrid.IsReadOnly = true;
         BikeDataGrid.IsReadOnly = true;
         string conn = ConfigurationManager.ConnectionStrings["ADOconnSQL"].ConnectionString;
-        customerBikeRepo = new CustomerBikeRepository(conn);
-        customerBikeManager = new CustomerBikeManager(customerBikeRepo);
-        repairmanRepository = new RepairmanRepository(conn);
-        repairmanManager = new RepairmanManager(repairmanRepository);
+        customerBikeManager = new CustomerBikeManager(new CustomerBikeRepository(conn));
+        repairmanManager = new RepairmanManager(new RepairmanRepository(conn));
+        repairOrderManager = new RepairOrderManager(new RepairOrderRepository(conn));
         LoadGrids();
     }
 
@@ -55,9 +56,23 @@ public partial class MainWindow : Window
         bikes = new ObservableCollection<BikeUI>(customerBikeManager.GetBikesInfo().Select(x => new BikeUI(x.Id, x.Description, x.BikeType, x.PurchaseCost, x.Customer.id, x.Customer.custDesc)));
         customers = new ObservableCollection<CustomerUI>(customerBikeManager.GetCustomersInfo().Select(x => new CustomerUI(x.Id, x.Name, x.Email, x.Address, x.NrOfBikes, x.TotalBikeValues)));
         repairmen = new ObservableCollection<RepairmanUI>(repairmanManager.GetRepairmanInfos().Select(x=>new RepairmanUI(x.Id, x.Name, x.Email, x.CostPerHour)));
+        repairTasks = new ObservableCollection<RepairTaskUI>(repairOrderManager.GetRepairTaskInfos().Select(x=>new RepairTaskUI(x.Id, x.Description, x.RepairTime, x.CostMaterials)));
         BikeDataGrid.ItemsSource = bikes;
         CustomerDataGrid.ItemsSource = customers;
         RepairmenDataGrid.ItemsSource = repairmen;
+
+        RepairmenDataGrid.IsReadOnly = true;
+        RepairOrdersDataGrid.IsReadOnly = true;
+        RepairOrderItemsDataGrid.IsReadOnly = true;
+        //repairorder cb customer
+        CBCustomer.DisplayMemberPath = "Name";
+        CBCustomer.SelectedValuePath = "ID";
+        CBCustomer.ItemsSource = customers;
+    }
+
+    private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+    {
+        Application.Current.Shutdown();
     }
 
     #region customers
@@ -157,7 +172,7 @@ public partial class MainWindow : Window
         WindowRepairman repairmanWindow = new WindowRepairman(repairmanManager, this, true);
 
         RepairmanUI repairman = (RepairmanUI)RepairmenDataGrid.SelectedItem;
-        if (repairman == null) MessageBox.Show("No selection", "Bike");
+        if (repairman == null) MessageBox.Show("No selection", "Repairman");
         else
         {
             repairmanWindow.Repairman = repairman;
@@ -166,8 +181,83 @@ public partial class MainWindow : Window
     }
     #endregion
 
-    private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+    #region repairorders
+    private void CBCustomer_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
-        Application.Current.Shutdown();
+        CustomerInfo ci = CustomerMapper.ToDTO((CustomerUI)CBCustomer.SelectedItem);
+        repairOrders = new ObservableCollection<RepairOrderUI>(repairOrderManager.GetRepairOrderInfos(ci).Select(x => new RepairOrderUI(x.ID, x.Urgency, x.OrderDate, x.Paid)));
+        RepairOrdersDataGrid.ItemsSource = repairOrders;
     }
+    private void RepairOrdersDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        //load repair order items for this repair order
+    }
+
+    private void MenuItemAddRepairOrder_Click(object sender, RoutedEventArgs e)
+    {
+        //WindowRepairman windowRepairman = new WindowRepairman(repairmanManager, this);
+        //windowRepairman.Repairman = new RepairmanUI();
+        //windowRepairman.ShowDialog();
+    }
+    private void MenuItemDeleteRepairOrder_Click(object sender, RoutedEventArgs e)
+    {
+        //RepairmanUI repairman = (RepairmanUI)BikeDataGrid.SelectedItem;
+        //if (repairman == null) MessageBox.Show("No selection", "Repairman");
+        //else
+        //{
+        //    if (MessageBox.Show("Are you sure?", "Delete repairman", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+        //    {
+        //        RepairmanUI repairmanUI = (RepairmanUI)RepairmenDataGrid.SelectedItem;
+        //        repairmanManager.DeleteRepairman(RepairmanMapper.ToDTO(repairmanUI));
+        //    }
+        //}
+        //LoadGrids();
+    }
+    private void MenuItemUpdateRepairOrder_Click(object sender, RoutedEventArgs e)
+    {
+        //WindowRepairman repairmanWindow = new WindowRepairman(repairmanManager, this, true);
+
+        //RepairmanUI repairman = (RepairmanUI)RepairmenDataGrid.SelectedItem;
+        //if (repairman == null) MessageBox.Show("No selection", "Repairman");
+        //else
+        //{
+        //    repairmanWindow.Repairman = repairman;
+        //    repairmanWindow.ShowDialog();
+        //}
+    }
+
+    //repairorder items
+    private void MenuItemAddRepairOrderItem_Click(object sender, RoutedEventArgs e)
+    {
+        //WindowRepairman windowRepairman = new WindowRepairman(repairmanManager, this);
+        //windowRepairman.Repairman = new RepairmanUI();
+        //windowRepairman.ShowDialog();
+    }
+    private void MenuItemDeleteRepairOrderItem_Click(object sender, RoutedEventArgs e)
+    {
+        //RepairmanUI repairman = (RepairmanUI)BikeDataGrid.SelectedItem;
+        //if (repairman == null) MessageBox.Show("No selection", "Repairman");
+        //else
+        //{
+        //    if (MessageBox.Show("Are you sure?", "Delete repairman", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+        //    {
+        //        RepairmanUI repairmanUI = (RepairmanUI)RepairmenDataGrid.SelectedItem;
+        //        repairmanManager.DeleteRepairman(RepairmanMapper.ToDTO(repairmanUI));
+        //    }
+        //}
+        //LoadGrids();
+    }
+    private void MenuItemUpdateRepairOrderItem_Click(object sender, RoutedEventArgs e)
+    {
+        //WindowRepairman repairmanWindow = new WindowRepairman(repairmanManager, this, true);
+
+        //RepairmanUI repairman = (RepairmanUI)RepairmenDataGrid.SelectedItem;
+        //if (repairman == null) MessageBox.Show("No selection", "Repairman");
+        //else
+        //{
+        //    repairmanWindow.Repairman = repairman;
+        //    repairmanWindow.ShowDialog();
+        //}
+    }
+    #endregion
 }

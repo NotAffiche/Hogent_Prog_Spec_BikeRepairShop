@@ -15,15 +15,15 @@ public class DomainFactory
     {
         try
         {
-            return new Customer(customerInfo.Name, customerInfo.Email, customerInfo.Address);
+            return new Customer(customerInfo.Id, customerInfo.Name, customerInfo.Email, customerInfo.Address);
         }
         catch (Exception ex) { throw new DomainException("NewCustomer", ex); }
     }
-    public static Customer ExistingCustomer(int id, string name, string email, string address, List<Bike> bikes)
+    public static Customer ExistingCustomer(int id, string name, string email, string address, List<Bike> bikes, List<RepairOrder> repairOrders)
     {
         try
         {
-            return new Customer(id, name, email, address, bikes);
+            return new Customer(id, name, email, address, bikes, repairOrders);
         }
         catch (Exception ex) { throw new DomainException("ExistingCustomer", ex); }
     }

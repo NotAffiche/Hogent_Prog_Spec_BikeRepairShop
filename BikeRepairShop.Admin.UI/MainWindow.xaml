@@ -41,6 +41,40 @@
                     </DataGrid.ContextMenu>
                 </DataGrid>
             </TabItem>
+            <TabItem Header="Repair Orders">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="2*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="0" Margin="5">
+                        <TextBlock Text="Customer:" VerticalAlignment="Center" />
+                        <ComboBox Name="CBCustomer" Margin="5" Width="150" SelectionChanged="CBCustomer_SelectionChanged"/>
+                    </StackPanel>
+                    <DataGrid Name="RepairOrdersDataGrid" Grid.Row="1" Grid.Column="0" SelectionChanged="RepairOrdersDataGrid_SelectionChanged" >
+                        <DataGrid.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Header="Add" Click="MenuItemAddRepairOrder_Click"/>
+                                <MenuItem Header="Delete" Click="MenuItemDeleteRepairOrder_Click"/>
+                                <MenuItem Header="Update" Click="MenuItemUpdateRepairOrder_Click"/>
+                            </ContextMenu>
+                        </DataGrid.ContextMenu>
+                    </DataGrid>
+                    <DataGrid Name="RepairOrderItemsDataGrid" Grid.Row="1" Grid.Column="1">
+                        <DataGrid.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Header="Add" Click="MenuItemAddRepairOrderItem_Click"/>
+                                <MenuItem Header="Delete" Click="MenuItemDeleteRepairOrderItem_Click"/>
+                                <MenuItem Header="Update" Click="MenuItemUpdateRepairOrderItem_Click"/>
+                            </ContextMenu>
+                        </DataGrid.ContextMenu>
+                    </DataGrid>
+                </Grid>
+            </TabItem>
         </TabControl>
     </Grid>
 </Window>
