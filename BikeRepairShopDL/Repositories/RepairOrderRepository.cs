@@ -21,6 +21,7 @@ public class RepairOrderRepository : IRepairOrderRepository
     {
         this.connectionString = connectionString;
     }
+    //
 
     public List<RepairOrderInfo> GetRepairOrderInfos(CustomerInfo c)
     {
@@ -51,13 +52,12 @@ public class RepairOrderRepository : IRepairOrderRepository
             throw new RepositoryException("RepairOrderRepo-GetRepairOrderInfos", ex);
         }
     }
-
     public List<RepairOrderItemInfo> GetRepairOrderItemInfos(RepairOrderInfo ro)
     {
         List<RepairOrderItemInfo> repairOrderItemInfos = new List<RepairOrderItemInfo>();
         try
         {
-            string sql = "SELECT * FROM RepairOrderItem WHERE Status=1 AND RepairOrderId=@roId;";
+            string sql = "SELECT * FROM RepairOrderItem roi JOIN Bike b ON roi.BikeId=b.Id JOIN RepairTask rt ON roi.RepairTaskId=rt.Id JOIN Repairman rm ON roi.RepairmanId=rm.Id WHERE roi.Status=1 AND roi.RepairOrderId=@roId;";
             using (SqlConnection conn = new SqlConnection(connectionString))
             using (SqlCommand cmd = conn.CreateCommand())
             {
@@ -67,7 +67,23 @@ public class RepairOrderRepository : IRepairOrderRepository
                 IDataReader reader = cmd.ExecuteReader();
                 while (reader.Read())
                 {
-                    RepairOrderItemInfo roii = new RepairOrderItemInfo((int)reader["id"], (int)reader["repairorderid"], (int)reader["bikeid"], (int)reader["repairtaskid"], (int)reader["repairmanid"]);
+                    RepairOrderItemInfo roii = new RepairOrderItemInfo(
+                        (int)reader[0],//id
+                        (int)ro.ID,//reporderid
+                        ro.OrderDate,//reporderdate
+                        ro.Urgency,//reporder urgency
+                        (int)reader[2],//bikeid
+                        (string)reader[7],//biketype
+                        (string)reader[8],//bikedesc
+                        (int)reader[12],//taskid
+                        (int)reader[14],//reptime
+                        (string)reader[13],//taskdesc
+                        (double)reader[15],//matcost
+                        (int)reader[17],//repman id
+                        (string)reader[18],//repman name
+                        (string)reader[19],//repman email
+                        (double)reader[20]//repman cph
+                        );
                     repairOrderItemInfos.Add(roii);
                 }
                 reader.Close();
@@ -79,7 +95,6 @@ public class RepairOrderRepository : IRepairOrderRepository
             throw new RepositoryException("RepairOrderRepo-GetRepairOrderInfos", ex);
         }
     }
-
     public List<RepairTaskInfo> GetRepairTaskInfos()
     {
         List<RepairTaskInfo> repairOrderInfos = new List<RepairTaskInfo>();

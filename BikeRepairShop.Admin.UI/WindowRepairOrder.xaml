@@ -1,0 +1,35 @@
+﻿<Window x:Class="BikeRepairShop.Admin.UI.WindowRepairOrder"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BikeRepairShop.Admin.UI"
+        mc:Ignorable="d"
+        Title="WindowRepairOrder" Height="200" Width="350" ResizeMode="NoResize" Loaded="Window_Loaded">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="2*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Label Content="ID" Grid.Row="0" Grid.Column="0" />
+        <Label Content="Order Date" Grid.Row="1" Grid.Column="0" />
+        <Label Content="Customer" Grid.Row="2" Grid.Column="0" />
+        <Label Content="Urgency" Grid.Row="3" Grid.Column="0" />
+        <Label Content="Paid" Grid.Row="4" Grid.Column="0" />
+        <TextBox Name="TBId" Grid.Row="0" Grid.Column="1" IsReadOnly="True"/>
+        <TextBox Name="TBOrderDate" Grid.Row="1" Grid.Column="1" IsReadOnly="True"/>
+        <TextBox Name="TBCustomer" Grid.Row="2" Grid.Column="1" IsReadOnly="True"/>
+        <ComboBox Name="CBUrgency" Grid.Row="3" Grid.Column="1"/>
+        <CheckBox Name="CheckPaid" Grid.Row="4" Grid.Column="1"/>
+        <Button x:Name="CancelBikeButton" Content="Cancel" Grid.Row="5" Grid.Column="0" Click="CancelRepairOrderButton_Click"/>
+        <Button x:Name="SaveBikeButton" Content="Save" Grid.Row="5" Grid.Column="1" Click="SaveRepairOrderButton_Click"/>
+    </Grid>
+</Window>

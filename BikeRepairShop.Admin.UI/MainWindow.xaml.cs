@@ -64,10 +64,17 @@ public partial class MainWindow : Window
         RepairmenDataGrid.IsReadOnly = true;
         RepairOrdersDataGrid.IsReadOnly = true;
         RepairOrderItemsDataGrid.IsReadOnly = true;
+        RepairOrdersDataGrid.ItemsSource = null;
+        RepairOrderItemsDataGrid.ItemsSource = null;
         //repairorder cb customer
         CBCustomer.DisplayMemberPath = "Name";
         CBCustomer.SelectedValuePath = "ID";
         CBCustomer.ItemsSource = customers;
+    }
+
+    public void Unfocus()
+    {
+        CBCustomer.SelectedItem = null;
     }
 
     private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
@@ -182,27 +189,45 @@ public partial class MainWindow : Window
     #endregion
 
     #region repairorders
+    public CustomerUI? cUI;
     private void CBCustomer_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
-        CustomerInfo ci = CustomerMapper.ToDTO((CustomerUI)CBCustomer.SelectedItem);
-        repairOrders = new ObservableCollection<RepairOrderUI>(repairOrderManager.GetRepairOrderInfos(ci).Select(x => new RepairOrderUI(x.ID, x.Urgency, x.OrderDate, x.Paid)));
-        RepairOrdersDataGrid.ItemsSource = repairOrders;
+        cUI = (CustomerUI)CBCustomer.SelectedItem;
+        if (cUI!=null)
+        {
+            CustomerInfo ci = CustomerMapper.ToDTO(cUI);
+            repairOrders = new ObservableCollection<RepairOrderUI>(repairOrderManager.GetRepairOrderInfos(ci).Select(x => new RepairOrderUI(x.ID, x.Urgency, x.OrderDate, x.Paid)));
+            RepairOrdersDataGrid.ItemsSource = repairOrders;
+            RepairOrderItemsDataGrid.ItemsSource = null;
+        }
     }
     private void RepairOrdersDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
         //load repair order items for this repair order
         RepairOrderUI roUI = (RepairOrderUI)RepairOrdersDataGrid.SelectedItem;
-        CustomerUI cUI = (CustomerUI)CBCustomer.SelectedItem;
-        RepairOrderInfo roi = new RepairOrderInfo(roUI.ID, roUI.Urgency, roUI.Paid, roUI.OrderDate, cUI.ID, $"{cUI.Name} ({cUI.Email})");
-        repairOrderItems = new ObservableCollection<RepairOrderItemUI>(repairOrderManager.GetRepairOrderItemInfos(roi).Select(x=>new RepairOrderItemUI()));
-        RepairOrderItemsDataGrid.ItemsSource = repairOrderItems;
+        if (roUI!= null)
+        {
+            cUI = (CustomerUI)CBCustomer.SelectedItem;
+            RepairOrderInfo roi = new RepairOrderInfo(roUI.ID, roUI.Urgency, roUI.Paid, roUI.OrderDate, cUI.ID, $"{cUI.Name} ({cUI.Email})");
+            repairOrderItems = new ObservableCollection<RepairOrderItemUI>(repairOrderManager.GetRepairOrderItemInfos(roi).Select(x => new RepairOrderItemUI(x.ID, x.RepairOrder.RepairOrderId, x.RepairOrder.OrderDate, 
+                x.RepairOrder.Urgency, x.Bike.BikeId, x.Bike.BikeType, x.Bike.Description, x.RepairTask.RepairTaskId, x.RepairTask.RepairTime, x.RepairTask.Description, x.RepairTask.CostMaterials, x.Repairman.RepairmanId, x.Repairman.Name, 
+                x.Repairman.Email, x.Repairman.CostPerHour)));
+            RepairOrderItemsDataGrid.ItemsSource = repairOrderItems;
+        }
     }
 
     private void MenuItemAddRepairOrder_Click(object sender, RoutedEventArgs e)
     {
-        //WindowRepairman windowRepairman = new WindowRepairman(repairmanManager, this);
-        //windowRepairman.Repairman = new RepairmanUI();
-        //windowRepairman.ShowDialog();
+        if ((CustomerUI)CBCustomer.SelectedItem!=null)
+        {
+            WindowRepairOrder windowRepairOrder = new WindowRepairOrder(repairOrderManager, this, (CustomerUI)CBCustomer.SelectedItem);
+            windowRepairOrder.RepairOrder = new RepairOrderUI();
+            windowRepairOrder.Show();
+        }
+        else
+        {
+            MessageBox.Show("Select a customer", "Repair Order");
+        }
     }
     private void MenuItemDeleteRepairOrder_Click(object sender, RoutedEventArgs e)
     {
@@ -220,15 +245,16 @@ public partial class MainWindow : Window
     }
     private void MenuItemUpdateRepairOrder_Click(object sender, RoutedEventArgs e)
     {
-        //WindowRepairman repairmanWindow = new WindowRepairman(repairmanManager, this, true);
+        WindowRepairOrder windowRepairOrder = new WindowRepairOrder(repairOrderManager, this, (CustomerUI)CBCustomer.SelectedItem, true);
 
-        //RepairmanUI repairman = (RepairmanUI)RepairmenDataGrid.SelectedItem;
-        //if (repairman == null) MessageBox.Show("No selection", "Repairman");
-        //else
-        //{
-        //    repairmanWindow.Repairman = repairman;
-        //    repairmanWindow.ShowDialog();
-        //}
+        RepairOrderUI repairOrder = (RepairOrderUI)RepairOrdersDataGrid.SelectedItem;
+        if (repairOrder == null) MessageBox.Show("No selection", "Repair Order");
+        else
+        {
+            windowRepairOrder.cUI = (CustomerUI)CBCustomer.SelectedItem;
+            windowRepairOrder.RepairOrder = repairOrder;
+            windowRepairOrder.ShowDialog();
+        }
     }
 
     //repairorder items

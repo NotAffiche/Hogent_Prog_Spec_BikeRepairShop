@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BikeRepairShop.Admin.UI"
         mc:Ignorable="d"
-        Title="Bike Shop Manager" Height="450" Width="800" Closing="Window_Closing">
+        Title="Bike Shop Manager" Height="550" Width="1000" Closing="Window_Closing" ResizeMode="NoResize">
     <Grid>
         <TabControl>
             <TabItem Header="Customer">

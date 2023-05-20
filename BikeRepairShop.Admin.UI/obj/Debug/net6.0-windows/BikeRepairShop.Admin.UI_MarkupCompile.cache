@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET6_0;NETCOREAPP
 C:\Users\Adrian\Desktop\Prog EXA\Hogent_Prog_Spec_BikeRepairShop\BikeRepairShop.Admin.UI\App.xaml
-4-768376365
+5-1909025571
 
-15-713023989
+17835498964
 197-1336039642
-MainWindow.xaml;WindowBike.xaml;WindowCustomer.xaml;WindowRepairman.xaml;
+MainWindow.xaml;WindowBike.xaml;WindowCustomer.xaml;WindowRepairman.xaml;WindowRepairOrder.xaml;
 
 False
 
