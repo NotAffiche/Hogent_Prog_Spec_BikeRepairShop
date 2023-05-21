@@ -10,12 +10,13 @@ namespace BikeRepairShopBL.Domain;
 
 public class Bike
 {
-    internal Bike(int? id, BikeType bikeType, double purchaseCost, string? description)
+    internal Bike(int? id, BikeType bikeType, double purchaseCost, string? description, Customer? c = null)
     {
         if (id.HasValue) SetId((int)id);
         BikeType = bikeType;
         SetPurchaseCost(purchaseCost);
         Description = description;
+        if (c!=null) this.SetCustomer(c);
     }
 
     public int? ID { get; private set; }

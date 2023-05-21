@@ -336,8 +336,7 @@ public class CustomerBikeRepository : ICustomerBikeRepository
     {
         try
         {
-            string sqlC = "SELECT t1.*,t2.id bikeid,t2.biketype,t2.purchasecost,t2.description FROM customer t1 left join (select * from bike where status=1) t2 on t1.id=t2.customerid " +
-                "WHERE t1.id=@id AND t1.status=1";
+            string sqlC = "SELECT * FROM bike t1 left join (select * from customer where status=1) t2 on t1.CustomerId=t2.id WHERE t1.id=@id AND t1.status=1;";
             using (SqlConnection connection = new SqlConnection(connectionString))
             using (SqlCommand command = connection.CreateCommand())
             {
@@ -348,14 +347,16 @@ public class CustomerBikeRepository : ICustomerBikeRepository
                 BikeType bikeType = BikeType.regularBike;
                 double purchaseCost = 0;
                 string? description = null;
+                Customer? c = null;
                 while (reader.Read())
                 {
                     bikeType = (BikeType)Enum.Parse(typeof(BikeType), (string)reader["biketype"]);
                     description = (string?)reader["Description"];
                     purchaseCost = (double)reader["purchasecost"];
+                    c = DomainFactory.ExistingCustomer((int)reader[6], (string)reader["name"], (string)reader["email"], (string)reader["address"]);
                 }
                 reader.Close();
-                return DomainFactory.ExistingBike(id, bikeType, purchaseCost, description);
+                return DomainFactory.ExistingBike(id, bikeType, purchaseCost, description, c);
             }
         }
         catch (Exception ex)

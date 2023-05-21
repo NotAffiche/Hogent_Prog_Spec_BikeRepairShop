@@ -113,7 +113,12 @@ public class RepairOrderManager
         try
         {
             if (roiInfo == null) throw new ManagerException("RepairOrderManager RemROI roiInfo null");
-            RepairOrderItem roi = repo.GetRepairOrderItem((int)roiInfo.ID!, roiInfo.RepairOrder.RepairOrderId, customerBikeRepo.GetBike(roiInfo.Bike.BikeId), roiInfo.RepairTask.RepairTaskId, repairmanRepo.GetRepairman(roiInfo.Repairman.RepairmanId));
+            //RepairOrderItem roi = repo.GetRepairOrderItem((int)roiInfo.ID!, roiInfo.RepairOrder.RepairOrderId, customerBikeRepo.GetBike(roiInfo.Bike.BikeId), roiInfo.RepairTask.RepairTaskId, repairmanRepo.GetRepairman(roiInfo.Repairman.RepairmanId));
+            RepairOrder ro = repo.GetRepairOrder((int)roiInfo.RepairOrder.RepairOrderId!);
+            Bike bike = customerBikeRepo.GetBike((int)roiInfo.Bike.BikeId!);
+            RepairTask rt = repo.GetRepairTask((int)roiInfo.RepairTask.RepairTaskId);
+            Repairman rm = repairmanRepo.GetRepairman((int)roiInfo.Repairman.RepairmanId);
+            RepairOrderItem roi = DomainFactory.ExistingRepairOrderItem(roiInfo.ID!, ro, bike, rt, rm);
             repo.UpdateRepairOrderItem(roi);
         }
         catch (Exception ex) { throw new ManagerException("RepairOrder update roi", ex); }

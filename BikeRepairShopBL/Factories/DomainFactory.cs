@@ -19,7 +19,7 @@ public class DomainFactory
         }
         catch (Exception ex) { throw new DomainException("NewCustomer", ex); }
     }
-    public static Customer ExistingCustomer(int id, string name, string email, string address, List<Bike> bikes, List<RepairOrder> repairOrders)
+    public static Customer ExistingCustomer(int id, string name, string email, string address, List<Bike>? bikes = null, List<RepairOrder>? repairOrders = null)
     {
         try
         {
@@ -29,7 +29,7 @@ public class DomainFactory
             }
             else
             {
-                return new Customer(id, name, email, address, bikes, repairOrders);
+                return new Customer(id, name, email, address, bikes!, repairOrders!);
             }
         }
         catch (Exception ex) { throw new DomainException("ExistingCustomer", ex); }
@@ -42,13 +42,13 @@ public class DomainFactory
         }
         catch (Exception ex) { throw new DomainException("NewBike", ex); }
     }
-    public static Bike ExistingBike(int? id, BikeType bikeType, double purchaseCost, string? description)
+    public static Bike ExistingBike(int? id, BikeType bikeType, double purchaseCost, string? description, Customer? c = null)
     {
         try
         {
-            return new Bike(id, bikeType, purchaseCost, description);
+            return new Bike(id, bikeType, purchaseCost, description, c);
         }
-        catch (Exception ex) { throw new DomainException("NewBike", ex); }
+        catch (Exception ex) { throw new DomainException("ExistingBike", ex); }
     }
 
     public static Repairman NewRepairman(RepairmanInfo ri)
