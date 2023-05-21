@@ -54,7 +54,7 @@ public partial class MainWindow : Window
     public void LoadGrids()
     {
         bikes = new ObservableCollection<BikeUI>(customerBikeManager.GetBikesInfo().Select(x => new BikeUI(x.Id, x.Description, x.BikeType, x.PurchaseCost, x.Customer.id, x.Customer.custDesc)));
-        customers = new ObservableCollection<CustomerUI>(customerBikeManager.GetCustomersInfo().Select(x => new CustomerUI(x.Id, x.Name, x.Email, x.Address, x.NrOfBikes, x.TotalBikeValues)));
+        customers = new ObservableCollection<CustomerUI>(customerBikeManager.GetCustomersInfo().Select(x => new CustomerUI(x.Id, x.Name, x.Email, x.Address, x.NrOfBikes, x.TotalBikeValues, x.NrOfRepairOrders)));
         repairmen = new ObservableCollection<RepairmanUI>(repairmanManager.GetRepairmanInfos().Select(x=>new RepairmanUI(x.Id, x.Name, x.Email, x.CostPerHour)));
         repairTasks = new ObservableCollection<RepairTaskUI>(repairOrderManager.GetRepairTaskInfos().Select(x=>new RepairTaskUI(x.Id, x.Description, x.RepairTime, x.CostMaterials)));
         BikeDataGrid.ItemsSource = bikes;
@@ -196,7 +196,7 @@ public partial class MainWindow : Window
         if (cUI!=null)
         {
             CustomerInfo ci = CustomerMapper.ToDTO(cUI);
-            repairOrders = new ObservableCollection<RepairOrderUI>(repairOrderManager.GetRepairOrderInfos(ci).Select(x => new RepairOrderUI(x.ID, x.Urgency, x.OrderDate, x.Paid)));
+            repairOrders = new ObservableCollection<RepairOrderUI>(repairOrderManager.GetRepairOrderInfos(ci).Select(x => new RepairOrderUI(x.ID, x.Urgency, x.OrderDate, x.Paid, x.Cost)));
             RepairOrdersDataGrid.ItemsSource = repairOrders;
             RepairOrderItemsDataGrid.ItemsSource = null;
         }

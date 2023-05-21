@@ -25,7 +25,7 @@ public class RepairOrderRepository : IRepairOrderRepository
     //
 
     #region get
-    public RepairOrder GetRepairOrder(int id)
+    public RepairOrder GetRepairOrder(int id, Bike? b = null, Repairman? rm = null)
     {
         RepairOrder? ro = null;
         try
@@ -43,6 +43,14 @@ public class RepairOrderRepository : IRepairOrderRepository
                     DateTime dt = reader.GetDateTime(2);
                     Customer c = DomainFactory.ExistingCustomer((int)reader[6], (string)reader["name"], (string)reader["email"], (string)reader["address"], null, null);
                     ro = DomainFactory.ExistingRepairOrder((int)reader[0], (Urgency)Enum.Parse(typeof(Urgency), (string)reader["urgency"]), new DateOnly(dt.Year, dt.Month, dt.Day), c, Convert.ToBoolean((int)reader["paid"]));
+                }
+                RepairOrderInfo roi = new RepairOrderInfo(ro.ID, ro.Urgency.ToString(), ro.Paid, ro.OrderDate, ro.Customer.ID, $"{ro.Customer.Name} ({ro.Customer.Email})");
+                List<RepairOrderItemInfo> roiInfos = GetRepairOrderItemInfos(roi);
+                foreach (RepairOrderItemInfo roiInfo in roiInfos)
+                {
+                    ro.AddRepairOrderItem(new RepairOrderItemInfo(roiInfo.ID, roiInfo.RepairOrder.RepairOrderId, roiInfo.RepairOrder.OrderDate, roiInfo.RepairOrder.Urgency, roiInfo.Bike.BikeId, roiInfo.Bike.BikeType,
+                            roiInfo.Bike.Description, roiInfo.RepairTask.RepairTaskId, roiInfo.RepairTask.RepairTime, roiInfo.RepairTask.Description, roiInfo.RepairTask.CostMaterials, roiInfo.Repairman.RepairmanId,
+                            roiInfo.Repairman.Name, roiInfo.Repairman.Email, roiInfo.Repairman.CostPerHour));//DomainFactory.ExistingRepairOrderItem(roiInfo.ID, ro, b, GetRepairTask(roiInfo.RepairTask.RepairTaskId), rm)
                 }
                 reader.Close();
             }
@@ -88,7 +96,7 @@ public class RepairOrderRepository : IRepairOrderRepository
         List<RepairOrderInfo> repairOrderInfos = new List<RepairOrderInfo>();
         try
         {
-            string sql = "SELECT ro.id, ro.urgency, ro.orderdate, ro.customerid, ro.paid, ro.status, c.Id as cid, c.Name, c.Email, c.Status FROM RepairOrder ro JOIN Customer c on ro.CustomerId=c.Id " +
+            string sql = "SELECT ro.id, ro.urgency, ro.orderdate, ro.customerid, ro.paid, ro.status, c.Id as cid, c.Name, c.Email, c.Address, c.Status FROM RepairOrder ro JOIN Customer c on ro.CustomerId=c.Id " +
                 "WHERE ro.Status=1 AND c.Status=1 AND ro.CustomerId=@custId;";
             using (SqlConnection conn = new SqlConnection(connectionString))
             using (SqlCommand cmd = conn.CreateCommand())
@@ -100,7 +108,17 @@ public class RepairOrderRepository : IRepairOrderRepository
                 while (reader.Read())
                 {
                     DateTime dt = reader.GetDateTime(2);
-                    RepairOrderInfo roi = new RepairOrderInfo((int)reader["id"], (string)reader["urgency"], Convert.ToBoolean((int)reader["paid"]), new DateOnly(dt.Year, dt.Month, dt.Day), (int)reader["cid"], $"{(string)reader["name"]} ({(string)reader["email"]})");
+                    Customer c = DomainFactory.ExistingCustomer((int)reader["cid"], (string)reader["name"], (string)reader["email"], (string)reader["address"]);
+                    RepairOrder ro = DomainFactory.ExistingRepairOrder((int)reader["id"], (Urgency)Enum.Parse(typeof(Urgency), (string)reader["urgency"]), new DateOnly(dt.Year, dt.Month, dt.Day), c, Convert.ToBoolean((int)reader["paid"]));
+                    RepairOrderInfo roi = new RepairOrderInfo(ro.ID, ro.Urgency.ToString(), 0, ro.Paid, ro.OrderDate, ro.Customer.ID, $"{ro.Customer.Name} ({ro.Customer.Email})");
+                    List<RepairOrderItemInfo> roiInfos = GetRepairOrderItemInfos(roi);
+                    foreach (RepairOrderItemInfo roiInfo in roiInfos)
+                    {
+                        ro.AddRepairOrderItem(new RepairOrderItemInfo(roiInfo.ID, roiInfo.RepairOrder.RepairOrderId, roiInfo.RepairOrder.OrderDate, roiInfo.RepairOrder.Urgency, roiInfo.Bike.BikeId, roiInfo.Bike.BikeType,
+                            roiInfo.Bike.Description, roiInfo.RepairTask.RepairTaskId, roiInfo.RepairTask.RepairTime, roiInfo.RepairTask.Description, roiInfo.RepairTask.CostMaterials, roiInfo.Repairman.RepairmanId,
+                            roiInfo.Repairman.Name, roiInfo.Repairman.Email, roiInfo.Repairman.CostPerHour));
+                    }
+                    roi.Cost=ro.GetCost();
                     repairOrderInfos.Add(roi);
                 }
                 reader.Close();
@@ -232,16 +250,16 @@ public class RepairOrderRepository : IRepairOrderRepository
                     int id = (int)command.ExecuteScalar();
                     ro.SetId(id);
                     command.CommandText = sqlB;
-                    foreach (RepairOrderItem roi in ro.GetRepairOrderItems())
+                    foreach (RepairOrderItemInfo roi in ro.GetRepairOrderItems())
                     {
                         command.Parameters.Clear();
-                        command.Parameters.AddWithValue("@repairoderid", roi.RepairOrder.ID);
-                        command.Parameters.AddWithValue("@bikeid", roi.Bike.ID);
-                        command.Parameters.AddWithValue("@repairtaskid", roi.RepairTask.ID);
-                        command.Parameters.AddWithValue("@repairmanid", roi.Repairman.ID);
+                        command.Parameters.AddWithValue("@repairoderid", roi.RepairOrder.RepairOrderId);
+                        command.Parameters.AddWithValue("@bikeid", roi.Bike.BikeId);
+                        command.Parameters.AddWithValue("@repairtaskid", roi.RepairTask.RepairTaskId);
+                        command.Parameters.AddWithValue("@repairmanid", roi.Repairman.RepairmanId);
                         command.Parameters.AddWithValue("@status", 1);
-                        int roiId = (int)command.ExecuteScalar();
-                        roi.SetId(roiId);
+                        //int roiId = (int)command.ExecuteScalar();
+                        //roi.SetId(roiId);
                     }
                     transaction.Commit();
                 }

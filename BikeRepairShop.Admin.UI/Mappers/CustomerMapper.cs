@@ -12,6 +12,6 @@ public static class CustomerMapper
 {
     public static CustomerInfo ToDTO(CustomerUI custUI)
     {
-        return new CustomerInfo(custUI.ID, custUI.Name, custUI.Email, custUI.Address, custUI.NrOfBikes, custUI.TotalBikesValue);
+        return new CustomerInfo(custUI.ID, custUI.Name, custUI.Email, custUI.Address, custUI.NrOfBikes, custUI.TotalBikesValue, custUI.NrOfRepairOrders);
     }
 }

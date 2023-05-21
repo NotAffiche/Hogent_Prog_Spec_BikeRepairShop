@@ -1,4 +1,5 @@
-﻿using BikeRepairShopBL.Exceptions;
+﻿using BikeRepairShopBL.DTO;
+using BikeRepairShopBL.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,7 +34,10 @@ public class RepairOrderItem
     public void SetRepairOrder(RepairOrder ro)
     {
         if (ro == null) throw new DomainException("RepairOrderItem ro null");
-        if (!ro.GetRepairOrderItems().Contains(this)) ro.AddRepairOrderItem(this);
+        if (!ro.GetRepairOrderItems().Contains(new RepairOrderItemInfo(ID, (int)RepairOrder.ID!, RepairOrder.OrderDate, RepairOrder.Urgency.ToString(), (int)Bike.ID!, Bike.BikeType.ToString(), Bike.Description, (int)RepairTask.ID!,
+            RepairTask.RepairTime, RepairTask.Description, RepairTask.CostMaterials, (int)Repairman.ID!, Repairman.Name, Repairman.Email, Repairman.CostPerHour))) ro.AddRepairOrderItem(
+                new RepairOrderItemInfo(ID, (int)RepairOrder.ID!, RepairOrder.OrderDate, RepairOrder.Urgency.ToString(), (int)Bike.ID!, Bike.BikeType.ToString(), Bike.Description, (int)RepairTask.ID!,
+            RepairTask.RepairTime, RepairTask.Description, RepairTask.CostMaterials, (int)Repairman.ID!, Repairman.Name, Repairman.Email, Repairman.CostPerHour));
         RepairOrder = ro;
     }
     public void SetBike(Bike bike)

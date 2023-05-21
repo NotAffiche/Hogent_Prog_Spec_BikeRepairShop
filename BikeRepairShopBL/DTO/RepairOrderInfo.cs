@@ -31,8 +31,8 @@ public class RepairOrderInfo
 
     public int? ID { get; set; }
     public string Urgency { get; set; }
-    public double? Cost { get; }
-    public bool Paid { get; }
+    public double? Cost { get; set; }
+    public bool Paid { get; set; }
     public DateOnly OrderDate { get; }
     public (int? id, string custDesc) Customer { get; set; }
     public override string ToString()

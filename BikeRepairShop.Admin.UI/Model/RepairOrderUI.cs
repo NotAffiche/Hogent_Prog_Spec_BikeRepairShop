@@ -13,14 +13,13 @@ public class RepairOrderUI : INotifyPropertyChanged
     {
 
     }
-    public RepairOrderUI(int? id, string urgency, DateOnly orderdate, bool paid/*, int custId, string custDesc*/)
+    public RepairOrderUI(int? id, string urgency, DateOnly orderdate, bool paid, double? totalCost)
     {
         ID = id;
         Urgency = urgency;
         OrderDate = orderdate;
         Paid = paid;
-        //CustomerId = custId;
-        //CustomerDescription = custDesc;
+        if (totalCost.HasValue) TotalCost = (double)totalCost;
     }
 
     public int? ID { get; set; }
@@ -30,10 +29,8 @@ public class RepairOrderUI : INotifyPropertyChanged
     public DateOnly OrderDate { get { return _orderDate; } set { _orderDate = value; OnPropertyChanged(); } }
     private bool _paid;
     public bool Paid { get { return _paid; } set { _paid = value; OnPropertyChanged(); } }
-    //private int _custId;
-    //public int CustomerId { get { return _custId; } set { _custId = value; OnPropertyChanged(); } }
-    //private string _custDesc;
-    //public string CustomerDescription { get { return _custDesc; } set { _custDesc = value; OnPropertyChanged(); } }
+    private double _totalCost;
+    public double TotalCost { get { return _totalCost; } set { _totalCost= value; OnPropertyChanged(); } }
 
     //event
     public event PropertyChangedEventHandler? PropertyChanged;

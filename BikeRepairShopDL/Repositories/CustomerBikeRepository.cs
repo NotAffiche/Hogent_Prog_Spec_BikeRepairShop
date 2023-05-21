@@ -264,15 +264,20 @@ public class CustomerBikeRepository : ICustomerBikeRepository
         {
             string sql;
             if (name == null)
-                sql = "SELECT t1.id,t1.name,t1.email,t1.address,count(t2.id) nrofbikes,coalesce(sum(t2.purchasecost),0) totalcost "
-                 + " FROM customer t1 left join (select * from bike where status=1) t2 on t1.id=t2.customerId "
-                 + " WHERE t1.status=1 "
-                 + " group by t1.id,t1.name,t1.email,t1.address";
+                sql = "SELECT c.id, c.name, c.email, c.address, COUNT(DISTINCT b.Id) AS nrOfBikes, COUNT(DISTINCT ro.Id) AS nrOfRepOrders, COALESCE(SUM(b.purchasecost), 0) totalcost " +
+                    "FROM Customer c " +
+                    "LEFT JOIN Bike b ON c.Id = b.CustomerId AND b.Status = 1 " +
+                    "LEFT JOIN RepairOrder ro ON c.Id = ro.CustomerId AND ro.Status = 1 " +
+                    "WHERE c.Status=1 " +
+                    "GROUP BY c.id, c.name, c.email, c.address;";
             else
-                sql = "SELECT t1.id,t1.name,t1.email,t1.address,count(t2.id) nrofbikes,coalesce(sum(t2.purchasecost),0) totalcost "
-                + " FROM customer t1 left join (select * from bike where status=1) t2 on t1.id=t2.customerId "
-                + " WHERE t1.status=1 AND t1.name LIKE @namematch "
-                + " group by t1.id,t1.name,t1.email,t1.address";
+                sql =
+                    sql = "SELECT c.id, c.name, c.email, c.address, COUNT(DISTINCT b.Id) AS nrOfBikes, COUNT(DISTINCT ro.Id) AS nrOfRepOrders, COALESCE(SUM(b.purchasecost), 0) totalcost " +
+                    "FROM Customer c " +
+                    "LEFT JOIN Bike b ON c.Id = b.CustomerId AND b.Status = 1 " +
+                    "LEFT JOIN RepairOrder ro ON c.Id = ro.CustomerId AND ro.Status = 1 " +
+                    "WHERE c.Status=1 AND c.name LIKE @namematch" +
+                    "GROUP BY c.id, c.name, c.email, c.address;";
             List<CustomerInfo> customers = new List<CustomerInfo>();
             using (SqlConnection connection = new SqlConnection(connectionString))
             using (SqlCommand command = connection.CreateCommand())
@@ -283,7 +288,7 @@ public class CustomerBikeRepository : ICustomerBikeRepository
                 IDataReader reader = command.ExecuteReader();
                 while (reader.Read())
                 {
-                    customers.Add(new CustomerInfo((int)reader["id"], (string)reader["name"], (string)reader["email"], (string)reader["address"], (int)reader["nrofbikes"], (double)reader["totalcost"]));
+                    customers.Add(new CustomerInfo((int)reader["id"], (string)reader["name"], (string)reader["email"], (string)reader["address"], (int)reader["nrofbikes"], (double)reader["totalcost"], (int)reader["nrofreporders"]));
                 }
                 reader.Close();
                 return customers;

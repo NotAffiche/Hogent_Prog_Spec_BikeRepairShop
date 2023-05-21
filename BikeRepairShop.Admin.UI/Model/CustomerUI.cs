@@ -14,7 +14,7 @@ public class CustomerUI : INotifyPropertyChanged
     {
 
     }
-    public CustomerUI(int? id, string name, string email, string address, int nrOfBikes, double totalBikesValue)
+    public CustomerUI(int? id, string name, string email, string address, int nrOfBikes, double totalBikesValue, int nrOfRepOrders)
     {
         ID = id;
         Name = name;
@@ -22,6 +22,7 @@ public class CustomerUI : INotifyPropertyChanged
         Address = address;
         NrOfBikes = nrOfBikes;
         TotalBikesValue = totalBikesValue;
+        NrOfRepairOrders = nrOfRepOrders;
     }
 
     public int? ID { get; set; }
@@ -36,6 +37,8 @@ public class CustomerUI : INotifyPropertyChanged
     private double _totalBikesValue;
     public double TotalBikesValue { get { return _totalBikesValue; } set { _totalBikesValue= value; OnPropertyChanged(); } }
     //private List<Bike> _bikes = new List<Bike>();
+    private int _nrOfRepOrders;
+    public int NrOfRepairOrders { get { return _nrOfRepOrders; } set { _nrOfRepOrders= value; OnPropertyChanged(); } }
     public string CustomerDescription { get { return $"{Name} ({Email})"; } }
 
     //event
