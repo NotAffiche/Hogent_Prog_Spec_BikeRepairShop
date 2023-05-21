@@ -53,7 +53,7 @@ public partial class WindowRepairOrder : Window
         RepairOrder.Paid = (bool)CheckPaid.IsChecked!;
         if (update)
         {//update
-            //repairOrderManager.UpdateRepairOrder((RepairOrderMapper.OrderToDTO(RepairOrder, cUI));
+            repairOrderManager.UpdateRepairOrder((RepairOrderMapper.OrderToDTO(RepairOrder, cUI)));
         }
         else
         {//add

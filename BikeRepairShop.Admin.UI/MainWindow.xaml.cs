@@ -231,17 +231,16 @@ public partial class MainWindow : Window
     }
     private void MenuItemDeleteRepairOrder_Click(object sender, RoutedEventArgs e)
     {
-        //RepairmanUI repairman = (RepairmanUI)BikeDataGrid.SelectedItem;
-        //if (repairman == null) MessageBox.Show("No selection", "Repairman");
-        //else
-        //{
-        //    if (MessageBox.Show("Are you sure?", "Delete repairman", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
-        //    {
-        //        RepairmanUI repairmanUI = (RepairmanUI)RepairmenDataGrid.SelectedItem;
-        //        repairmanManager.DeleteRepairman(RepairmanMapper.ToDTO(repairmanUI));
-        //    }
-        //}
-        //LoadGrids();
+        RepairOrderUI repairOrder = (RepairOrderUI)RepairOrdersDataGrid.SelectedItem;
+        if (repairOrder == null) MessageBox.Show("No selection", "Repair order");
+        else
+        {
+            if (MessageBox.Show("Are you sure?", "Delete repair order", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+            {
+                repairOrderManager.RemoveRepairOrder(RepairOrderMapper.OrderToDTO(repairOrder, cUI));
+            }
+        }
+        LoadGrids();
     }
     private void MenuItemUpdateRepairOrder_Click(object sender, RoutedEventArgs e)
     {
@@ -273,17 +272,17 @@ public partial class MainWindow : Window
     }
     private void MenuItemDeleteRepairOrderItem_Click(object sender, RoutedEventArgs e)
     {
-        //RepairmanUI repairman = (RepairmanUI)BikeDataGrid.SelectedItem;
-        //if (repairman == null) MessageBox.Show("No selection", "Repairman");
-        //else
-        //{
-        //    if (MessageBox.Show("Are you sure?", "Delete repairman", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
-        //    {
-        //        RepairmanUI repairmanUI = (RepairmanUI)RepairmenDataGrid.SelectedItem;
-        //        repairmanManager.DeleteRepairman(RepairmanMapper.ToDTO(repairmanUI));
-        //    }
-        //}
-        //LoadGrids();
+        RepairOrderItemUI repairOrderItem = (RepairOrderItemUI)RepairOrderItemsDataGrid.SelectedItem;
+        if (repairOrderItem == null) MessageBox.Show("No selection", "Repair order item");
+        else
+        {
+            if (MessageBox.Show("Are you sure?", "Delete repair order item", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+            {
+                RepairOrderItemInfo roiInfo = RepairOrderMapper.OrderItemToDTO(repairOrderItem, cUI);
+                repairOrderManager.RemoveRepairOrderItem(roiInfo);
+            }
+        }
+        LoadGrids();
     }
     private void MenuItemUpdateRepairOrderItem_Click(object sender, RoutedEventArgs e)
     {
@@ -297,15 +296,6 @@ public partial class MainWindow : Window
             windowRepairOrderItem.RepairOrderItem = repairOrderItem;
             windowRepairOrderItem.ShowDialog();
         }
-        //WindowRepairman repairmanWindow = new WindowRepairman(repairmanManager, this, true);
-
-        //RepairmanUI repairman = (RepairmanUI)RepairmenDataGrid.SelectedItem;
-        //if (repairman == null) MessageBox.Show("No selection", "Repairman");
-        //else
-        //{
-        //    repairmanWindow.Repairman = repairman;
-        //    repairmanWindow.ShowDialog();
-        //}
     }
     #endregion
 }

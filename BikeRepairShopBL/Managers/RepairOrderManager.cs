@@ -77,35 +77,43 @@ public class RepairOrderManager
         catch (Exception ex) { throw new ManagerException("RepairOrder add roi", ex); }
     }
 
-    public void RemoveRepairOrder(RepairOrder ro)
+    public void RemoveRepairOrder(RepairOrderInfo roInfo)
     {
         try
         {
+            if (roInfo == null) throw new ManagerException("RepairOrderManager RemRO roInfo null");
+            RepairOrder ro = repo.GetRepairOrder((int)roInfo.ID!);
             repo.RemoveRepairOrder(ro);
         }
         catch (Exception ex) { throw new ManagerException("RepairOrder remove ro", ex); }
     }
-    public void RemoveRepairOrderItem(RepairOrderItem roi)
+    public void RemoveRepairOrderItem(RepairOrderItemInfo roiInfo)
     {
         try
         {
+            if (roiInfo == null) throw new ManagerException("RepairOrderManager RemROI roiInfo null");
+            RepairOrderItem roi = repo.GetRepairOrderItem((int)roiInfo.ID!, roiInfo.RepairOrder.RepairOrderId, customerBikeRepo.GetBike(roiInfo.Bike.BikeId), roiInfo.RepairTask.RepairTaskId, repairmanRepo.GetRepairman(roiInfo.Repairman.RepairmanId));
             repo.RemoveRepairOrderItem(roi);
         }
         catch (Exception ex) { throw new ManagerException("RepairOrder remove roi", ex); }
     }
 
-    public void UpdateRepairOrder(RepairOrder ro)
+    public void UpdateRepairOrder(RepairOrderInfo roInfo)
     {
         try
         {
+            if (roInfo == null) throw new ManagerException("RepairOrderManager UpdateRO roInfo null");
+            RepairOrder ro = DomainFactory.ExistingRepairOrder(roInfo.ID, (Urgency)Enum.Parse(typeof(Urgency), roInfo.Urgency), roInfo.OrderDate, customerBikeRepo.GetCustomer((int)roInfo.Customer.id!), roInfo.Paid);
             repo.UpdateRepairOrder(ro);
         }
         catch (Exception ex) { throw new ManagerException("RepairOrder update ro", ex); }
     }
-    public void UpdateRepairOrderItem(RepairOrderItem roi)
+    public void UpdateRepairOrderItem(RepairOrderItemInfo roiInfo)
     {
         try
         {
+            if (roiInfo == null) throw new ManagerException("RepairOrderManager RemROI roiInfo null");
+            RepairOrderItem roi = repo.GetRepairOrderItem((int)roiInfo.ID!, roiInfo.RepairOrder.RepairOrderId, customerBikeRepo.GetBike(roiInfo.Bike.BikeId), roiInfo.RepairTask.RepairTaskId, repairmanRepo.GetRepairman(roiInfo.Repairman.RepairmanId));
             repo.UpdateRepairOrderItem(roi);
         }
         catch (Exception ex) { throw new ManagerException("RepairOrder update roi", ex); }

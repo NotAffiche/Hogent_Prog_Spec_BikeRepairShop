@@ -62,7 +62,7 @@ public partial class WindowRepairOrderItem : Window
         if (update)
         {//update
             RepairOrderItem.ID = int.Parse(TBId.Text);
-            //repairOrderManager.UpdateRepairOrder((RepairOrderMapper.OrderToDTO(RepairOrder, cUI));
+            repairOrderManager.UpdateRepairOrderItem((RepairOrderMapper.OrderItemToDTO(RepairOrderItem, cUI)));
         }
         else
         {//add
@@ -91,6 +91,12 @@ public partial class WindowRepairOrderItem : Window
             if (update)
             {//update
                 TBId.Text = RepairOrderItem.ID.ToString();
+                BikeUI selectedBike = bikesPerCustomer.FirstOrDefault(b => b.ID == RepairOrderItem.BikeId)!;
+                CBBike.SelectedItem = selectedBike;
+                RepairTaskUI selectedTask = parentWindow.repairTasks.FirstOrDefault(x => x.ID == RepairOrderItem.RepairTaskId)!;
+                CBRepairTask.SelectedItem = selectedTask;
+                RepairmanUI selectedRepairman = parentWindow.repairmen.FirstOrDefault(x => x.ID == RepairOrderItem.RepairmanId)!;
+                CBRepairman.SelectedItem = selectedRepairman;
             }
             else
             {//create

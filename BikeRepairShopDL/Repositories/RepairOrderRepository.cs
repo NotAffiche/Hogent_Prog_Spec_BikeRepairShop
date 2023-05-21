@@ -53,6 +53,36 @@ public class RepairOrderRepository : IRepairOrderRepository
             throw new RepositoryException("RepairOrderRepo-GetRepairOrder", ex);
         }
     }
+    public RepairOrderItem GetRepairOrderItem(int id, int roId, Bike b, int rtId, Repairman rm)
+    {
+        RepairOrderItem? roi = null;
+        try
+        {
+            string sql = "SELECT * FROM RepairOrderItem roi WHERE roi.Status=1 AND roi.Id=@roId";
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            using (SqlCommand cmd = conn.CreateCommand())
+            {
+                conn.Open();
+                cmd.CommandText = sql;
+                cmd.Parameters.AddWithValue("@roId", id);
+                IDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    //ro
+                    RepairOrder ro = GetRepairOrder(roId);
+                    //bike
+                    RepairTask rt = GetRepairTask(rtId);
+                    roi = DomainFactory.ExistingRepairOrderItem(id, ro, b, rt, rm);
+                }
+                reader.Close();
+            }
+            return roi;
+        }
+        catch (Exception ex)
+        {
+            throw new RepositoryException("RepairOrderRepo-GetRepairOrder", ex);
+        }
+    }
     public List<RepairOrderInfo> GetRepairOrderInfos(int custId)
     {
         List<RepairOrderInfo> repairOrderInfos = new List<RepairOrderInfo>();
@@ -99,7 +129,7 @@ public class RepairOrderRepository : IRepairOrderRepository
                 {
                     RepairOrderItemInfo roii = new RepairOrderItemInfo(
                         (int)reader[0],//id
-                        (int)ro.ID,//reporderid
+                        (int)ro.ID!,//reporderid
                         ro.OrderDate,//reporderdate
                         ro.Urgency,//reporder urgency
                         (int)reader[2],//bikeid
@@ -254,24 +284,77 @@ public class RepairOrderRepository : IRepairOrderRepository
     #region remove
     public void RemoveRepairOrder(RepairOrder ro)
     {
-        throw new NotImplementedException();
+        try
+        {
+            string sql = "UPDATE RepairOrder SET status=0 WHERE id=@id and status=1";
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            using (SqlCommand command = connection.CreateCommand())
+            {
+                connection.Open();
+                command.CommandText = sql;
+                command.Parameters.AddWithValue("@id", ro.ID);
+                command.ExecuteNonQuery();
+            }
+        }
+        catch (Exception ex) { throw new RepositoryException("DeleteRepairOrder", ex); }
     }
 
     public void RemoveRepairOrderItem(RepairOrderItem roi)
     {
-        throw new NotImplementedException();
+        try
+        {
+            string sql = "UPDATE RepairOrderItem SET status=0 WHERE id=@id and status=1";
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            using (SqlCommand command = connection.CreateCommand())
+            {
+                connection.Open();
+                command.CommandText = sql;
+                command.Parameters.AddWithValue("@id", roi.ID);
+                command.ExecuteNonQuery();
+            }
+        }
+        catch (Exception ex) { throw new RepositoryException("DeleteRepairOrderItem", ex); }
     }
     #endregion
 
     #region update
     public void UpdateRepairOrder(RepairOrder ro)
     {
-        throw new NotImplementedException();
+        try
+        {
+            string sql = "UPDATE RepairOrder SET urgency=@urgency,paid=@paid WHERE id=@id and status=1";
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            using (SqlCommand command = connection.CreateCommand())
+            {
+                connection.Open();
+                command.CommandText = sql;
+                command.Parameters.AddWithValue("@urgency", ro.Urgency.ToString());
+                command.Parameters.AddWithValue("@paid", Convert.ToInt32(ro.Paid));
+                command.Parameters.AddWithValue("@id", ro.ID);
+                command.ExecuteNonQuery();
+            }
+        }
+        catch (Exception ex) { throw new RepositoryException("UpdateRepairOrder", ex); }
     }
 
     public void UpdateRepairOrderItem(RepairOrderItem roi)
     {
-        throw new NotImplementedException();
+        try
+        {
+            string sql = "UPDATE RepairOrderItem SET bikeid=@bikeid,repairtaskid=@repairtaskid,repairmanid=@repairmanid WHERE id=@id and status=1";
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            using (SqlCommand command = connection.CreateCommand())
+            {
+                connection.Open();
+                command.CommandText = sql;
+                command.Parameters.AddWithValue("@bikeid", (object?)roi.Bike.ID);
+                command.Parameters.AddWithValue("@repairtaskid", (object?)roi.RepairTask.ID);
+                command.Parameters.AddWithValue("@repairmanid", (object?)roi.Repairman.ID);
+                command.Parameters.AddWithValue("@id", roi.ID);
+                command.ExecuteNonQuery();
+            }
+        }
+        catch (Exception ex) { throw new RepositoryException("UpdateRepairOrder", ex); }
     }
     #endregion
 }
