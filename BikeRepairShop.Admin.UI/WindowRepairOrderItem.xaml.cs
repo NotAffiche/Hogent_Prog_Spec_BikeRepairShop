@@ -51,25 +51,29 @@ public partial class WindowRepairOrderItem : Window
         BikeUI bike = (BikeUI)CBBike.SelectedItem;
         RepairTaskUI repairTask = (RepairTaskUI)CBRepairTask.SelectedItem;
         RepairmanUI repairman = (RepairmanUI)CBRepairman.SelectedItem;
-        RepairOrderItem.RepairOrderId = (int)roUI.ID!;
-        RepairOrderItem.RepairOrder = (roUI.OrderDate, roUI.Urgency);
-        RepairOrderItem.BikeId = (int)bike.ID!;
-        RepairOrderItem.Bike = (bike.BikeType.ToString(), bike.Description);
-        RepairOrderItem.RepairTaskId = (int)repairTask.ID!;
-        RepairOrderItem.RepairTask = (repairTask.RepairTime, repairTask.Description, repairTask.CostMaterials);
-        RepairOrderItem.RepairmanId = (int)repairman.ID!;
-        RepairOrderItem.Repairman = (repairman.Name, repairman.Email, repairman.CostPerHour);
-        if (update)
-        {//update
-            RepairOrderItem.ID = int.Parse(TBId.Text);
-            repairOrderManager.UpdateRepairOrderItem((RepairOrderMapper.OrderItemToDTO(RepairOrderItem, cUI)));
-        }
+        if (bike == null || repairTask == null || repairman == null) MessageBox.Show("Make sure to select bike repairtask repairman");
         else
-        {//add
+        {
+            RepairOrderItem.RepairOrderId = (int)roUI.ID!;
+            RepairOrderItem.RepairOrder = (roUI.OrderDate, roUI.Urgency);
+            RepairOrderItem.BikeId = (int)bike.ID!;
+            RepairOrderItem.Bike = (bike.BikeType.ToString(), bike.Description);
+            RepairOrderItem.RepairTaskId = (int)repairTask.ID!;
+            RepairOrderItem.RepairTask = (repairTask.RepairTime, repairTask.Description, repairTask.CostMaterials);
+            RepairOrderItem.RepairmanId = (int)repairman.ID!;
+            RepairOrderItem.Repairman = (repairman.Name, repairman.Email, repairman.CostPerHour);
+            if (update)
+            {//update
+                RepairOrderItem.ID = int.Parse(TBId.Text);
+                repairOrderManager.UpdateRepairOrderItem((RepairOrderMapper.OrderItemToDTO(RepairOrderItem, cUI)));
+            }
+            else
+            {//add
             repairOrderManager.AddRepairOrderItem(RepairOrderMapper.OrderItemToDTO(RepairOrderItem, cUI));
+            }
+            parentWindow.LoadGrids();
+            Close();
         }
-        parentWindow.LoadGrids();
-        Close();
     }
 
     private void Window_Loaded(object sender, RoutedEventArgs e)
